@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>코인 브리핑 - 최신</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2f3d;
+    --text: #e4e6eb;
+    --muted: #8b92a5;
+    --accent: #5eead4;
+    --link: #60a5fa;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+  }
+  h1 {
+    font-size: 28px;
+    margin: 0 0 8px;
+    color: var(--accent);
+  }
+  .updated {
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .nav {
+    margin-top: 12px;
+  }
+  .nav a {
+    color: var(--link);
+    text-decoration: none;
+    font-size: 14px;
+    margin-right: 16px;
+  }
+  .nav a:hover { text-decoration: underline; }
+  .digest-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .digest-section h2 {
+    font-size: 18px;
+    margin: 0 0 12px;
+    color: var(--accent);
+  }
+  .digest-section ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .digest-section li {
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+  .digest-section a {
+    color: var(--link);
+    text-decoration: none;
+  }
+  .digest-section a:hover { text-decoration: underline; }
+  strong { color: #fbbf24; }
+  .archive {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .archive h2 {
+    font-size: 16px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .archive ul {
+    list-style: none;
+    padding: 0;
+  }
+  .archive li {
+    padding: 6px 0;
+  }
+  .archive a {
+    color: var(--link);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .archive a:hover { text-decoration: underline; }
+  footer {
+    margin-top: 40px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>📊 코인 브리핑</h1>
+    <div class="updated">업데이트: 2026-04-13 16:47 KST</div>
+    <div class="nav">
+      <a href="./index.html">🏠 최신</a>
+      <a href="./archive.html">📅 전체 아카이브</a>
+    </div>
+  </header>
+  <main>
+    <section class="digest-section">
+  <h2>🚨 사건·사고 (해킹, 디페깅 등)</h2>
+  <ul>
+    <li><strong>$DOT</strong> — 공격자가 이더리움 상에서 10억 달러 상당의 폴카닷 토큰을 위조 민팅했으나, 실제 탈취액은 약 $250,000에 그침. 브리지 취약점 악용 추정. <a href="https://www.coindesk.com/tech/2026/04/13/attacker-mints-usd1-billion-polkadot-tokens-on-ethereum-ends-up-stealing-just-usd250-000" target="_blank">링크</a></li>
+    <li><strong>$BTC</strong> — 뮤지션 G. Love, 앱스토어 내 가짜 Ledger 앱에 시드 구문 입력 후 5.9 BTC(약 $420K) 전액 탈취. 공식 앱 사칭 사기 주의 요망. <a href="https://www.theblock.co/post/397155/g-love-loses-btc-fake-ledger" target="_blank">링크</a></li>
+    <li>FBI 발표 — 2025년 미국 내 암호화폐 관련 사기 피해액 사상 최대 <strong>$114억</strong> 기록. 60세 이상 노년층 피해가 $44억으로 전체의 38% 차지. <a href="https://www.theblock.co/post/397134/fbi-says-crypto-related-fraud-losses-hit-record-11-4-billion-in-2025-with-seniors-bearing-the-brunt" target="_blank">링크</a></li>
+    <li>악성 AI 에이전트 라우터 발견 — 연구진, 사용자 트랜잭션을 가로채 암호화폐를 탈취할 수 있는 악성 AI 에이전트 라우터 존재 확인. DeFi 자동화 사용자 각별한 주의 필요. <a href="https://cointelegraph.com/news/researchers-discover-malicious-ai-agent-routers-that-can-steal-crypto" target="_blank">링크</a></li>
+    <li><strong>디페깅 경보</strong> — <strong>$TBILL</strong>(OpenEden) $1.140, <strong>$USDY</strong>(Ondo) $1.127, <strong>$USYC</strong>(Circle) $1.122, <strong>$reUSD</strong>(Re Protocol) $1.071 수준에서 페그 이탈 지속 중. 수익형 스테이블코인 특성상 의도된 프리미엄이나 변동성 모니터링 권장. <a href="https://defillama.com/stablecoin/openeden-tbill" target="_blank">TBILL</a> / <a href="https://defillama.com/stablecoin/ondo-us-dollar-yield" target="_blank">USDY</a></li>
+    <li><strong>$WLFI</strong> vs 저스틴 선 — 저스틴 선이 WLFI 토큰 컨트랙트에 블랙리스트 백도어가 숨겨져 있다고 폭로하자, WLFI 측이 즉각 법적 대응 예고("See you in court"). 트럼프 연계 프로젝트 신뢰성 논란 재점화. <a href="https://www.theblock.co/post/397126/see-you-in-court-wlfi-threatens-justin-sun-after-he-alleges-hidden-blacklist-backdoor-in-token-contract" target="_blank">링크</a></li>
+    <li>Bithumb 620,000 BTC 오전송 사태 — 한국은행(BOK), 해당 사건을 계기로 국내 암호화폐 거래소에 '서킷 브레이커' 도입 및 내부 통제 강화를 공식 촉구. <a href="https://www.theblock.co/post/397162/bank-of-korea-circuit-breaker" target="_blank">링크</a></li>
+  </ul>
+</section>
+
+<section class="digest-section">
+  <h2>🔥 트위터 화제 코인</h2>
+  <ul>
+    <li><strong>$DOT</strong> (Polkadot, 시총 43위) — 이더리움 브리지 민팅 공격 사건으로 트렌딩 1위 급부상. 단기 변동성 주의. <a href="https://www.coingecko.com/en/coins/polkadot" target="_blank">링크</a></li>
+    <li><strong>$WLFI</strong> (World Liberty Financial, 시총 37위) — 저스틴 선과의 법적 분쟁 폭로전으로 커뮤니티 화제. $75M DeFi 대출 논란 지속. <a href="https://www.coingecko.com/en/coins/world-liberty-financial" target="_blank">링크</a></li>
+    <li><strong>$TAO</strong> (Bittensor, 시총 38위) — AI 인프라 내러티브 지속, AI 에이전트 악용 뉴스와 맞물려 관심 집중. <a href="https://www.coingecko.com/en/coins/bittensor" target="_blank">링크</a></li>
+    <li><strong>$HYPE</strong> (Hyperliquid, 시총 13위) — 트럼프의 호르무즈 해협 봉쇄령 직후 Hyperliquid 플랫폼 내 오일 선물 7% 급등 기록. 온체인 파생상품 거래소로 재조명. <a href="https://www.coingecko.com/en/coins/hyperliquid" target="_blank">링크</a></li>
+    <li><strong>$MON</strong> (Monad, 시총 114위) — 지속적인 트렌딩 유지. <a href="https://www.coingecko.com/en/coins/monad" target="_blank">링크</a></li>
+    <li><strong>$ETH</strong> (Ethereum, 시총 2위) — 비트코인과 함께 추세 반전 가능 구간 근접 언급, 트렌딩 유지. <a href="https://www.coingecko.com/en/coins/ethereum" target="_blank">링크</a></li>
+  </ul>
+</section>
+
+<section class="digest-section">
+  <h2>🌍 거시/매크로</h2>
+  <ul>
+    <li><strong>미-이란 전쟁 리스크 고조</strong> — 트럼프 대통령, 호르무즈 해협 해군 봉쇄 명령. 미-이란 협상 결렬 이후 <strong>$BTC</strong> $71,000 아래로 하락. 원유 선물 급등. 애널리스트들은 "이란 전쟁 여파가 2026년 시장을 지배할 것"이라 경고. <a href="https://cointelegraph.com/news/btc-fragile-iran-fallout-dominate-markets-2026" target="_blank">링크</a></li>
+    <li><strong>$BTC 가격 전망</strong> — $88,000 돌파 시나리오 vs. $65,000 베이스 형성론 공존. Strategy(MicroStrategy) 추가 매수 시그널 포착 — 연간 BTC 2% 성장만으로도 배당 커버 가능하다고 언급. <a href="https://www.coindesk.com/markets/2026/04/13/strategy-signals-another-bitcoin-buy-as-company-needs-just-2-annual-btc-growth-to-cover-dividends" target="_blank">링크</a></li>
+    <li><strong>이란 전쟁發 디뱅킹</strong> — 원자재 트레이더들, 전쟁 여파로 은행 계좌 차단 → 스테이블코인 의존도 급증. 스테이블코인 실사용 내러티브 강화. <a href="https://www.coindesk.com/business/2026/04/12/commodity-traders-are-getting-debanked-due-to-iran-war-pushing-them-to-rely-on-stablecoins" target="_blank">링크</a></li>
+    <li><strong>Aave DAO 이정표 의결</strong> — Aave Labs에 $25M 펀딩 그랜트 및 토큰 배분 승인. 수개월간 이어진 프로토콜 수익 통제권 분쟁 마무리. <a href="https://www.theblock.co/post/397138/aave-dao-approves-25-million-aave-labs-funding-grant-in-binding-aave-will-win-vote" target="_blank">링크</a></li>
+    <li><strong>Alameda, $SOL $1,600만 이동</strong> — FTX 채권자 분배 목적으로 추정되는 솔라나 토큰 대규모 이전. 매도 압력 모니터링 필요. <a href="https://www.coindesk.com/markets/2026/04/13/alameda-moves-usd16-million-in-solana-s-sol-token-for-possible-creditor-distribution" target="_blank">링크</a></li>
+    <li><strong>ECB, ESMA 암호화폐 감독 집중화 지지</strong> — 유럽중앙은행이 EU 내 암호화폐 감독 권한을 파리 소재 ESMA에 집중시키는 방안에 공식 지지 표명. 충분한 인력·예산 확보 및 단계적 전환 권고. <a href="https://www.theblock.co/post/397121/ecb-backs-eu-plan-to-centralize-crypto-supervision-under-paris-based-esma-watchdog-reuters" target="_blank">링크</a></li>
+    <li><strong>Bitwise, $HYPE ETF 2차 수정안 제출</strong> — Wintermute·Flowdesk를 거래 상대방으로 추가. 전일 독일 Xetra에 실물 기반 HYPE 스테이킹 ETP 상장 완료. <a href="https://www.theblock.co/post/397117/bitwise-files-second-amendment-to-hyperliquid-etf-adds-wintermute-and-flowdesk-as-trading-counterparties" target="_blank">링크</a></li>
+    <li><strong>기관 불마켓, 리테일은 소외</strong> — Exodus CEO: "기관은 이미 강세장 진입, 리테일은 아직 인지 못 한 상태"라고 언급. 기관-개인 투자자 간 온도차 확대. <a href="https://cointelegraph.com/news/institutions-are-in-a-bull-market-and-retail-hasn-t-even-noticed-yet-exec" target="_blank">링크</a></li>
+  </ul>
+</section>
+  </main>
+  
+  <div class="archive">
+    <h2>📅 최근 다이제스트</h2>
+    <ul>
+    <li><a href="./archive/2026-04-13-1647.html">2026-04-13 16:47 KST</a></li>
+    </ul>
+  </div>
+
+  <footer>
+    Generated by News Bot · Powered by Claude
+  </footer>
+</div>
+</body>
+</html>
