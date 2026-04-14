@@ -7,94 +7,174 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>코인 브리핑 - 최신</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://cdn.jsdelivr.net/gh/DungGeunMo/dunggeunmo-web-font/DungGeunMo.css');
-
   :root {
-    --bg: #2b2b46;
-    --card: #1a1a2e;
-    --border: #e94560; /* 레트로 붉은색 테두리 */
-    --text: #f1f1f1;
-    --text-sub: #c8c8d8;
-    --muted: #8a8aab;
-    --accent: #00ffcc; /* 레트로 민트 */
-    --accent-soft: rgba(0, 255, 204, 0.15);
-    --highlight: #ffd700; /* 골드 코인 느낌의 노란색 */
-    --divider: #4a4a6a;
+    /* 밝은 시티팝 팔레트: 파스텔 하늘, 핑크, 민트 조합 */
+    --bg-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
+    --card: rgba(255, 255, 255, 0.75);
+    --border: #ff85a2; /* 선명한 핑크 테두리 */
+    --text: #2d3436;
+    --text-sub: #4b5563;
+    --muted: #7f8c8d;
+    --accent: #00d2ff; /* 밝은 스카이 블루 */
+    --accent-soft: rgba(0, 210, 255, 0.1);
+    --highlight: #ff4d94; /* 강조용 핫핑크 */
+    --divider: rgba(255, 133, 162, 0.2);
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
-    font-family: 'DungGeunMo', sans-serif; /* 레트로 폰트 적용 */
-    background: var(--bg);
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
     color: var(--text);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
-    font-size: 16px;
   }
-  .container { max-width: 720px; margin: 0 auto; padding: 28px 20px 64px; }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
   header {
-    padding-bottom: 20px;
-    margin-bottom: 24px;
-    border-bottom: 4px dashed var(--border); /* 점선 테두리로 레트로감 강조 */
+    padding-bottom: 24px;
+    margin-bottom: 30px;
+    border-bottom: 2px dashed var(--border);
+    text-align: center;
   }
-  h1 { font-size: 28px; margin: 0 0 6px; color: var(--accent); }
-  .updated { color: var(--muted); font-size: 14px; }
-  .nav { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
-  .nav a {
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: #4834d4; /* 청량한 보라색 */
+    letter-spacing: -0.03em;
+    text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(255, 133, 162, 0.3);
+  }
+  .updated {
+    color: var(--text-sub);
+    font-size: 14px;
+    font-weight: 500;
+    background: #fff;
     display: inline-block;
-    padding: 8px 14px;
-    background: var(--card);
+    padding: 2px 10px;
+    border-radius: 4px;
+  }
+  .nav {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  .nav a {
+    padding: 8px 18px;
+    background: #fff;
     border: 2px solid var(--border);
-    color: var(--text);
+    border-radius: 50px;
+    color: var(--border);
     text-decoration: none;
     font-size: 14px;
-    transition: all 0.1s;
-    /* 각진 버튼 효과 */
-    box-shadow: 2px 2px 0px var(--border);
+    font-weight: 700;
+    transition: all 0.2s ease;
+    box-shadow: 3px 3px 0px var(--border);
   }
   .nav a:hover {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #000;
-    box-shadow: 0px 0px 0px;
-    transform: translate(2px, 2px); /* 눌리는 애니메이션 */
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px var(--border);
+    background: var(--accent-soft);
   }
-  .digest-section, .archive {
+  .digest-section {
     background: var(--card);
-    border: 2px solid var(--border);
-    padding: 22px 24px;
+    border: 2px solid #fff;
+    border-radius: 24px;
+    padding: 28px;
     margin-bottom: 20px;
-    /* 둥근 테두리 제거 및 그림자 효과 */
-    border-radius: 0; 
-    box-shadow: 4px 4px 0px var(--border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
   }
-  .digest-section h2 { font-size: 20px; margin: 0 0 14px; color: var(--highlight); }
-  .digest-section ul, .archive ul { margin: 0; padding: 0; list-style: none; }
-  .digest-section li, .archive li {
+  .digest-section h2 {
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0 0 18px;
+    color: #ff4d94;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .digest-section ul { margin: 0; padding: 0; list-style: none; }
+  .digest-section li {
     padding: 12px 0;
-    border-bottom: 2px dotted var(--divider);
-    font-size: 16px;
+    border-bottom: 1px solid var(--divider);
+    font-size: 15.5px;
     color: var(--text-sub);
   }
-  .digest-section li:last-child, .archive li:last-child { border-bottom: none; }
-  .digest-section li:first-child { padding-top: 0; }
-  .digest-section a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); }
-  .digest-section a:hover { background: var(--accent); color: #000; }
-  strong { color: var(--highlight); }
-  .archive { margin-top: 32px; border-color: var(--muted); box-shadow: 4px 4px 0px var(--muted); }
-  .archive h2 { font-size: 16px; color: var(--text); margin: 0 0 12px; }
-  .archive a { color: var(--text-sub); text-decoration: none; font-size: 15px; }
-  .archive a:hover { color: var(--highlight); }
-  footer { margin-top: 36px; text-align: center; color: var(--muted); font-size: 14px; }
-  
+  .digest-section li:last-child { border-bottom: none; }
+  .digest-section a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1.5px solid var(--accent);
+  }
+  strong {
+    color: var(--highlight);
+    background: linear-gradient(to top, rgba(255, 77, 148, 0.1) 40%, transparent 40%);
+  }
+  footer {
+    margin-top: 40px;
+    text-align: center;
+    color: var(--text-sub);
+    font-size: 13px;
+    font-weight: 500;
+  }
   @media (max-width: 560px) {
-    .container { padding: 20px 16px 48px; }
-    h1 { font-size: 24px; }
-    .digest-section, .archive { padding: 18px; box-shadow: 3px 3px 0px var(--border); }
+    .container { padding: 20px 16px; }
+    h1 { font-size: 26px; }
+    .digest-section { padding: 20px; border-radius: 18px; }
   }
 </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🐬 코인 브리핑</h1>
+    <div class="updated">Last Update: 2026-04-15 02:37 KST</div>
+    <nav class="nav">
+      <a href="./index.html">LATEST</a>
+      <a href="./archive.html">ARCHIVE</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="digest-section">
+      <h2>🚨 사건·사고</h2>
+      <ul>
+        <li>🔓 <strong>가짜 Ledger 앱 피싱 사기</strong> — Apple App Store에 등록된 가짜 Ledger Live 앱 피해 발생. <a href="#" target="_blank">기사보기</a></li>
+        </ul>
+    </section>
+
+    <section class="digest-section">
+      <h2>🔥 트위터 화제 코인</h2>
+      <ul>
+        <li><strong>$BTC</strong> — $75K 돌파, 강세 지속 중. <a href="#" target="_blank">기사보기</a></li>
+        </ul>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 News Bot · City Pop Edition
+  </footer>
+</div>
+</body>
+</html>
 </head>
 <body>
 <div class="container">
