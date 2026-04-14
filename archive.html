@@ -9,165 +9,135 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f7f8fa;
-    --card: #ffffff;
-    --border: #e5e7eb;
-    --text: #1a1a1a;
+    /* 밝은 시티팝 팔레트: 파스텔 하늘, 핑크, 민트 조합 */
+    --bg-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
+    --card: rgba(255, 255, 255, 0.75);
+    --border: #ff85a2;
+    --text: #2d3436;
     --text-sub: #4b5563;
-    --muted: #9ca3af;
-    --accent: #2563eb;
-    --accent-soft: #dbeafe;
-    --highlight: #f59e0b;
-    --divider: #f3f4f6;
+    --muted: #7f8c8d;
+    --accent: #00d2ff;
+    --accent-soft: rgba(0, 210, 255, 0.1);
+    --highlight: #ff4d94;
+    --divider: rgba(255, 133, 162, 0.2);
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
-    font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: var(--bg);
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
     color: var(--text);
-    line-height: 1.65;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
-    font-size: 16px;
   }
   .container {
     max-width: 720px;
     margin: 0 auto;
-    padding: 28px 20px 64px;
+    padding: 40px 20px 80px;
   }
   header {
-    padding-bottom: 20px;
-    margin-bottom: 24px;
-    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 30px;
+    border-bottom: 2px dashed var(--border);
+    text-align: center;
   }
   h1 {
-    font-size: 26px;
+    font-size: 32px;
     font-weight: 700;
-    margin: 0 0 6px;
-    color: var(--text);
-    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+    color: #4834d4; /* 청량한 보라색 */
+    letter-spacing: -0.03em;
+    text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(255, 133, 162, 0.3);
   }
   .updated {
-    color: var(--muted);
-    font-size: 13px;
+    color: var(--text-sub);
+    font-size: 14px;
     font-weight: 500;
+    background: #fff;
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 4px;
   }
   .nav {
-    margin-top: 14px;
+    margin-top: 20px;
     display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
   }
   .nav a {
-    display: inline-block;
-    padding: 6px 14px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    color: var(--text-sub);
+    padding: 8px 18px;
+    background: #fff;
+    border: 2px solid var(--border);
+    border-radius: 50px;
+    color: var(--border);
     text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-    transition: all 0.15s ease;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    box-shadow: 3px 3px 0px var(--border);
   }
   .nav a:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px var(--border);
     background: var(--accent-soft);
-    border-color: var(--accent);
-    color: var(--accent);
   }
   .digest-section {
     background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 22px 24px;
-    margin-bottom: 14px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    border: 2px solid #fff;
+    border-radius: 24px;
+    padding: 28px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
   }
   .digest-section h2 {
-    font-size: 17px;
-    font-weight: 600;
-    margin: 0 0 14px;
-    color: var(--text);
-    letter-spacing: -0.01em;
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0 0 18px;
+    color: #ff4d94;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-  .digest-section ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+  .digest-section ul { margin: 0; padding: 0; list-style: none; }
   .digest-section li {
-    padding: 10px 0;
+    padding: 12px 0;
     border-bottom: 1px solid var(--divider);
-    font-size: 15px;
+    font-size: 15.5px;
     color: var(--text-sub);
-    line-height: 1.6;
   }
   .digest-section li:last-child { border-bottom: none; }
-  .digest-section li:first-child { padding-top: 0; }
   .digest-section a {
     color: var(--accent);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
+    border-bottom: 1.5px solid var(--accent);
   }
-  .digest-section a:hover { text-decoration: underline; }
   strong {
     color: var(--highlight);
-    font-weight: 600;
+    background: linear-gradient(to top, rgba(255, 77, 148, 0.1) 40%, transparent 40%);
   }
-  .archive {
-    margin-top: 32px;
-    padding: 20px 24px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-  }
-  .archive h2 {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin: 0 0 12px;
-  }
-  .archive ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .archive li {
-    padding: 8px 0;
-    border-bottom: 1px solid var(--divider);
-  }
-  .archive li:last-child { border-bottom: none; }
-  .archive a {
+  footer {
+    margin-top: 40px;
+    text-align: center;
     color: var(--text-sub);
-    text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
   }
-  .archive a:hover { color: var(--accent); }
-  footer {
-    margin-top: 36px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 12px;
-  }
   @media (max-width: 560px) {
-    .container { padding: 20px 16px 48px; }
-    h1 { font-size: 22px; }
-    .digest-section { padding: 18px 18px; border-radius: 12px; }
-    .digest-section h2 { font-size: 16px; }
-    .digest-section li { font-size: 14.5px; }
-    .archive { padding: 16px 18px; }
+    .container { padding: 20px 16px; }
+    h1 { font-size: 26px; }
+    .digest-section { padding: 20px; border-radius: 18px; }
   }
 </style>
 </head>
 <body>
 <div class="container">
   <header>
-    <h1>📊 코인 브리핑</h1>
-    <div class="updated">업데이트: 총 8개 뉴스 요약</div>
+    <h1>🐬 코인 브리핑</h1>
+    <div class="updated">업데이트: 총 9개 뉴스 요약</div>
     <nav class="nav">
       <a href="./index.html">최신</a>
       <a href="./archive.html">전체 아카이브</a>
@@ -178,6 +148,7 @@
 <section class="digest-section">
   <h2>전체 뉴스 요약 아카이브</h2>
   <ul>
+    <li><a href="./archive/2026-04-15-0346.html">2026-04-15 03:46 KST</a></li>
     <li><a href="./archive/2026-04-15-0334.html">2026-04-15 03:34 KST</a></li>
     <li><a href="./archive/2026-04-15-0237.html">2026-04-15 02:37 KST</a></li>
     <li><a href="./archive/2026-04-15-0214.html">2026-04-15 02:14 KST</a></li>
@@ -190,7 +161,6 @@
 </section>
 
   </main>
-  
   <footer>
     Generated by News Bot · Powered by Claude
   </footer>
