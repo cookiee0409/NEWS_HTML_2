@@ -2,111 +2,164 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>코인 브리핑 - 전체 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f1117;
-    --card: #1a1d27;
-    --border: #2a2f3d;
-    --text: #e4e6eb;
-    --muted: #8b92a5;
-    --accent: #5eead4;
-    --link: #60a5fa;
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --border: #e5e7eb;
+    --text: #1a1a1a;
+    --text-sub: #4b5563;
+    --muted: #9ca3af;
+    --accent: #2563eb;
+    --accent-soft: #dbeafe;
+    --highlight: #f59e0b;
+    --divider: #f3f4f6;
   }
   * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+    font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.7;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    font-size: 16px;
   }
   .container {
-    max-width: 780px;
+    max-width: 720px;
     margin: 0 auto;
-    padding: 32px 20px 80px;
+    padding: 28px 20px 64px;
   }
   header {
-    border-bottom: 1px solid var(--border);
     padding-bottom: 20px;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
   }
   h1 {
-    font-size: 28px;
-    margin: 0 0 8px;
-    color: var(--accent);
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: var(--text);
+    letter-spacing: -0.02em;
   }
   .updated {
     color: var(--muted);
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 500;
   }
   .nav {
-    margin-top: 12px;
+    margin-top: 14px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
   }
   .nav a {
-    color: var(--link);
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-sub);
     text-decoration: none;
-    font-size: 14px;
-    margin-right: 16px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s ease;
   }
-  .nav a:hover { text-decoration: underline; }
+  .nav a:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
   .digest-section {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin-bottom: 16px;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
   }
   .digest-section h2 {
-    font-size: 18px;
-    margin: 0 0 12px;
-    color: var(--accent);
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 14px;
+    color: var(--text);
+    letter-spacing: -0.01em;
   }
   .digest-section ul {
     margin: 0;
-    padding-left: 20px;
+    padding: 0;
+    list-style: none;
   }
   .digest-section li {
-    margin-bottom: 8px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--divider);
     font-size: 15px;
+    color: var(--text-sub);
+    line-height: 1.6;
   }
+  .digest-section li:last-child { border-bottom: none; }
+  .digest-section li:first-child { padding-top: 0; }
   .digest-section a {
-    color: var(--link);
+    color: var(--accent);
     text-decoration: none;
+    font-weight: 500;
   }
   .digest-section a:hover { text-decoration: underline; }
-  strong { color: #fbbf24; }
+  strong {
+    color: var(--highlight);
+    font-weight: 600;
+  }
   .archive {
-    margin-top: 40px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
+    margin-top: 32px;
+    padding: 20px 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
   }
   .archive h2 {
-    font-size: 16px;
+    font-size: 12px;
+    font-weight: 600;
     color: var(--muted);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.08em;
+    margin: 0 0 12px;
   }
   .archive ul {
     list-style: none;
     padding: 0;
+    margin: 0;
   }
   .archive li {
-    padding: 6px 0;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--divider);
   }
+  .archive li:last-child { border-bottom: none; }
   .archive a {
-    color: var(--link);
+    color: var(--text-sub);
     text-decoration: none;
     font-size: 14px;
+    font-weight: 500;
   }
-  .archive a:hover { text-decoration: underline; }
+  .archive a:hover { color: var(--accent); }
   footer {
-    margin-top: 40px;
+    margin-top: 36px;
     text-align: center;
     color: var(--muted);
     font-size: 12px;
+  }
+  @media (max-width: 560px) {
+    .container { padding: 20px 16px 48px; }
+    h1 { font-size: 22px; }
+    .digest-section { padding: 18px 18px; border-radius: 12px; }
+    .digest-section h2 { font-size: 16px; }
+    .digest-section li { font-size: 14.5px; }
+    .archive { padding: 16px 18px; }
   }
 </style>
 </head>
@@ -114,17 +167,18 @@
 <div class="container">
   <header>
     <h1>📊 코인 브리핑</h1>
-    <div class="updated">업데이트: 총 5개 다이제스트</div>
-    <div class="nav">
-      <a href="./index.html">🏠 최신</a>
-      <a href="./archive.html">📅 전체 아카이브</a>
-    </div>
+    <div class="updated">업데이트: 총 6개 다이제스트</div>
+    <nav class="nav">
+      <a href="./index.html">최신</a>
+      <a href="./archive.html">전체 아카이브</a>
+    </nav>
   </header>
   <main>
     
 <section class="digest-section">
-  <h2>📅 전체 다이제스트 아카이브</h2>
+  <h2>전체 다이제스트 아카이브</h2>
   <ul>
+    <li><a href="./archive/2026-04-15-0214.html">2026-04-15 02:14 KST</a></li>
     <li><a href="./archive/2026-04-14-2057.html">2026-04-14 20:57 KST</a></li>
     <li><a href="./archive/2026-04-14-1500.html">2026-04-14 15:00 KST</a></li>
     <li><a href="./archive/2026-04-14-0836.html">2026-04-14 08:36 KST</a></li>
