@@ -9,61 +9,107 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* 밝은 시티팝 팔레트: 파스텔 하늘, 핑크, 민트 조합 */
     --bg-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
-    --card: rgba(255, 255, 255, 0.75);
+    --card: rgba(255, 255, 255, 0.78);
     --border: #ff85a2;
     --text: #2d3436;
     --text-sub: #4b5563;
     --muted: #7f8c8d;
     --accent: #00d2ff;
-    --accent-soft: rgba(0, 210, 255, 0.1);
+    --accent-soft: rgba(0, 210, 255, 0.12);
     --highlight: #ff4d94;
-    --divider: rgba(255, 133, 162, 0.2);
+    --divider: rgba(255, 133, 162, 0.22);
+    --up: #00b894;
+    --down: #e84393;
+    --title: #4834d4;
   }
   * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
-    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    font-family: '''Inter''', '''Noto Sans KR''', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg-gradient);
     background-attachment: fixed;
     color: var(--text);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
+    font-size: 16px;
   }
   .container {
     max-width: 720px;
     margin: 0 auto;
-    padding: 40px 20px 80px;
+    padding: 32px 20px 72px;
   }
+  .price-ticker {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .price-card {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #fff;
+    border-radius: 18px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(72, 52, 212, 0.08);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .price-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(72, 52, 212, 0.15);
+  }
+  .price-symbol {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--highlight);
+    letter-spacing: 0.05em;
+  }
+  .price-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--title);
+    margin-top: 2px;
+  }
+  .price-change {
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 2px;
+    color: var(--muted);
+  }
+  .price-change.up { color: var(--up); }
+  .price-change.down { color: var(--down); }
   header {
-    padding-bottom: 24px;
-    margin-bottom: 30px;
+    padding-bottom: 22px;
+    margin-bottom: 26px;
     border-bottom: 2px dashed var(--border);
     text-align: center;
   }
   h1 {
     font-size: 32px;
     font-weight: 700;
-    margin: 0 0 8px;
-    color: #4834d4; /* 청량한 보라색 */
+    margin: 0 0 10px;
+    color: var(--title);
     letter-spacing: -0.03em;
     text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(255, 133, 162, 0.3);
   }
   .updated {
     color: var(--text-sub);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     background: #fff;
     display: inline-block;
-    padding: 2px 10px;
+    padding: 3px 12px;
     border-radius: 4px;
   }
   .nav {
-    margin-top: 20px;
+    margin-top: 18px;
     display: flex;
     justify-content: center;
     gap: 12px;
+    flex-wrap: wrap;
   }
   .nav a {
     padding: 8px 18px;
@@ -72,7 +118,7 @@
     border-radius: 50px;
     color: var(--border);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     transition: all 0.2s ease;
     box-shadow: 3px 3px 0px var(--border);
@@ -85,30 +131,32 @@
   .digest-section {
     background: var(--card);
     border: 2px solid #fff;
-    border-radius: 24px;
-    padding: 28px;
-    margin-bottom: 20px;
+    border-radius: 22px;
+    padding: 24px 26px;
+    margin-bottom: 16px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 25px rgba(72, 52, 212, 0.06);
   }
   .digest-section h2 {
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 700;
-    margin: 0 0 18px;
-    color: #ff4d94;
+    margin: 0 0 14px;
+    color: var(--highlight);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
   }
   .digest-section ul { margin: 0; padding: 0; list-style: none; }
   .digest-section li {
-    padding: 12px 0;
+    padding: 11px 0;
     border-bottom: 1px solid var(--divider);
-    font-size: 15.5px;
+    font-size: 15px;
     color: var(--text-sub);
+    line-height: 1.65;
   }
   .digest-section li:last-child { border-bottom: none; }
+  .digest-section li:first-child { padding-top: 2px; }
   .digest-section a {
     color: var(--accent);
     text-decoration: none;
@@ -117,27 +165,99 @@
   }
   strong {
     color: var(--highlight);
-    background: linear-gradient(to top, rgba(255, 77, 148, 0.1) 40%, transparent 40%);
+    font-weight: 700;
+    background: linear-gradient(to top, rgba(255, 77, 148, 0.12) 40%, transparent 40%);
+    padding: 0 2px;
   }
+  .archive {
+    margin-top: 30px;
+    padding: 22px 26px;
+    background: var(--card);
+    border: 2px solid #fff;
+    border-radius: 22px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 10px 25px rgba(72, 52, 212, 0.06);
+  }
+  .archive h2 {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--highlight);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 12px;
+  }
+  .archive ul { list-style: none; padding: 0; margin: 0; }
+  .archive li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .archive li:last-child { border-bottom: none; }
+  .archive a {
+    color: var(--text-sub);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .archive a:hover { color: var(--accent); }
   footer {
-    margin-top: 40px;
+    margin-top: 34px;
     text-align: center;
     color: var(--text-sub);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
   }
   @media (max-width: 560px) {
-    .container { padding: 20px 16px; }
+    .container { padding: 20px 16px 56px; }
     h1 { font-size: 26px; }
     .digest-section { padding: 20px; border-radius: 18px; }
+    .digest-section h2 { font-size: 16px; }
+    .digest-section li { font-size: 14.5px; }
+    .archive { padding: 18px 20px; }
+    .price-ticker {
+      grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+      gap: 7px;
+    }
+    .price-card { padding: 10px 12px; border-radius: 14px; }
+    .price-value { font-size: 14px; }
   }
 </style>
 </head>
 <body>
 <div class="container">
+  
+  <div class="price-ticker">
+
+    <a href="https://coinmarketcap.com/currencies/bitcoin/" target="_blank" class="price-card">
+      <span class="price-symbol">BTC</span>
+      <span class="price-value">$75,604.00</span>
+      <span class="price-change up">+1.27%</span>
+    </a>
+    <a href="https://coinmarketcap.com/currencies/ethereum/" target="_blank" class="price-card">
+      <span class="price-symbol">ETH</span>
+      <span class="price-value">$2,352.96</span>
+      <span class="price-change up">+0.69%</span>
+    </a>
+    <a href="https://coinmarketcap.com/currencies/hyperliquid/" target="_blank" class="price-card">
+      <span class="price-symbol">HYPE</span>
+      <span class="price-value">$43.68</span>
+      <span class="price-change down">-2.36%</span>
+    </a>
+    <a href="https://coinmarketcap.com/currencies/solana/" target="_blank" class="price-card">
+      <span class="price-symbol">SOL</span>
+      <span class="price-value">$88.22</span>
+      <span class="price-change up">+3.54%</span>
+    </a>
+    <a href="https://coinmarketcap.com/currencies/xrp/" target="_blank" class="price-card">
+      <span class="price-symbol">XRP</span>
+      <span class="price-value">$1.45</span>
+      <span class="price-change up">+2.16%</span>
+    </a>
+  </div>
+
   <header>
     <h1>🐬 코인 브리핑</h1>
-    <div class="updated">업데이트: 총 19개 뉴스 요약</div>
+    <div class="updated">업데이트: 총 20개 뉴스 요약</div>
     <nav class="nav">
       <a href="./index.html">최신</a>
       <a href="./archive.html">전체 아카이브</a>
@@ -148,6 +268,7 @@
 <section class="digest-section">
   <h2>전체 뉴스 요약 아카이브</h2>
   <ul>
+    <li><a href="./archive/2026-04-17-2107.html">2026-04-17 21:07 KST</a></li>
     <li><a href="./archive/2026-04-17-2054.html">2026-04-17 20:54 KST</a></li>
     <li><a href="./archive/2026-04-17-1503.html">2026-04-17 15:03 KST</a></li>
     <li><a href="./archive/2026-04-17-0834.html">2026-04-17 08:34 KST</a></li>
@@ -171,6 +292,7 @@
 </section>
 
   </main>
+  
   <footer>
     Generated by News Bot · Powered by Claude
   </footer>
