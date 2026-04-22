@@ -113,23 +113,24 @@
   .bento {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: 120px;
     gap: 20px;
+    align-items: start;
   }
-  .card-events  { grid-column: span 8; grid-row: span 4; }
-  .card-twitter { grid-column: span 4; grid-row: span 4; }
-  .card-macro   { grid-column: span 8; grid-row: span 4; }
-  .card-archive { grid-column: 9 / span 4; grid-row: span 4; }
+  /* 고정 행 높이 없이 컨텐츠 길이에 맞게 자동 조정 */
+  .card-events  { grid-column: span 8; }
+  .card-twitter { grid-column: span 4; }
+  .card-macro   { grid-column: span 8; }
+  /* 아카이브: 항상 오른쪽 2번째 행에 */
+  .card-archive { grid-column: 9 / span 4; grid-row: 2; }
 
   /* ── CARD BASE ── */
   .card {
     position: relative;
     border-radius: var(--card-radius);
     padding: 28px;
-    overflow: hidden;
+    overflow: visible;
     transition: transform .28s cubic-bezier(.2,.7,.3,1), box-shadow .28s ease;
     display: flex; flex-direction: column;
-    min-height: 100%;
     isolation: isolate;
   }
   .card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -12px rgba(15,17,21,0.18); }
@@ -168,26 +169,32 @@
   }
 
   /* peek list */
-  .peek { display: flex; flex-direction: column; gap: 8px; flex: 1; }
-  .peek .row {
+  .peek { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .peek .row,
+  .peek a.row {
     display: flex; align-items: flex-start; gap: 10px;
     font-size: 13.5px; line-height: 1.45; color: var(--ink-2);
+    padding: 7px 8px; border-radius: 10px;
+    transition: background .15s ease;
   }
+  .peek a.row {
+    text-decoration: none; color: inherit; cursor: pointer;
+  }
+  .peek a.row:hover { background: rgba(15,17,21,0.06); }
+  .peek .row:not(a):hover { background: transparent; }
   .dot {
     width: 8px; height: 8px; border-radius: 50%;
-    flex-shrink: 0; margin-top: 4px;
+    flex-shrink: 0; margin-top: 5px;
   }
   .dot.red    { background: #e84040; }
   .dot.yellow { background: #f0a020; }
   .dot.green  { background: #1db87a; }
   .dot.blue   { background: #2f6bff; }
-  .peek .t a { color: var(--c-events-2); font-weight: 600; border-bottom: 1px solid currentColor; }
-  .card-twitter .peek .t a  { color: var(--c-twitter-2); }
-  .card-macro   .peek .t a  { color: var(--c-macro-2); }
-  .card-archive .peek .row  { border-bottom: 1px solid rgba(15,17,21,0.06); padding-bottom: 8px; }
-  .card-archive .peek .row:last-child { border-bottom: none; }
-  .card-archive a.row { transition: opacity .15s; }
-  .card-archive a.row:hover { opacity: .7; }
+  /* 카드별 hover 색상 */
+  .card-events  .peek a.row:hover { background: rgba(255,90,122,0.08); }
+  .card-twitter .peek a.row:hover { background: rgba(122,92,255,0.08); }
+  .card-macro   .peek a.row:hover { background: rgba(255,138,61,0.08); }
+  .card-archive .peek a.row:hover { background: rgba(47,107,255,0.08); }
 
   /* tags (twitter card) */
   .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 12px; }
@@ -222,18 +229,20 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 980px) {
-    .bento { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 100px; gap: 14px; }
-    .card-events  { grid-column: span 6; grid-row: span 5; }
-    .card-twitter { grid-column: span 6; grid-row: span 4; }
-    .card-macro   { grid-column: span 6; grid-row: span 5; }
-    .card-archive { grid-column: span 6; grid-row: span 3; }
+    .bento { grid-template-columns: repeat(6, 1fr); gap: 14px; }
+    .card-events  { grid-column: span 6; }
+    .card-twitter { grid-column: span 6; }
+    .card-macro   { grid-column: span 6; }
+    .card-archive { grid-column: span 6; grid-row: auto; }
     header.site { padding: 24px 16px 12px; }
     main { padding: 12px 16px 60px; }
   }
   @media (max-width: 620px) {
-    .bento { grid-template-columns: 1fr; grid-auto-rows: auto; gap: 12px; }
-    .card-events, .card-twitter, .card-macro, .card-archive { grid-column: 1; grid-row: auto; }
-    .card { padding: 22px; }
+    .bento { grid-template-columns: 1fr; gap: 12px; }
+    .card-events, .card-twitter, .card-macro, .card-archive {
+      grid-column: 1; grid-row: auto;
+    }
+    .card { padding: 20px; }
     .card h2 { font-size: 18px; }
     .brand h1 { font-size: 22px; }
   }
@@ -254,7 +263,7 @@
     <div class="mark">🐬</div>
     <div>
       <h1>코인 브리핑</h1>
-      <div class="sub">업데이트: 총 27개 뉴스 요약</div>
+      <div class="sub">업데이트: 총 28개 뉴스 요약</div>
     </div>
   </div>
   <nav class="nav">
@@ -268,8 +277,9 @@
     
     <div class="card card-events" style="grid-column:1/-1;grid-row:auto;">
       <span class="chip">📰 전체 뉴스 요약 아카이브</span>
-      <h2>전체 브리핑 목록 (27개)</h2>
+      <h2>전체 브리핑 목록 (28개)</h2>
       <div class="peek">
+    <a class="row" href="./archive/2026-04-22-1340.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-22 13:40 KST</span></a>
     <a class="row" href="./archive/2026-04-22-1253.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-22 12:53 KST</span></a>
     <a class="row" href="./archive/2026-04-22-1224.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-22 12:24 KST</span></a>
     <a class="row" href="./archive/2026-04-21-1226.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-21 12:26 KST</span></a>
