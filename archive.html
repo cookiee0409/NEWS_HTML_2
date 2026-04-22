@@ -2,306 +2,360 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>코인 브리핑 - 전체 아카이브</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
-    --card: rgba(255, 255, 255, 0.78);
-    --border: #ff85a2;
-    --text: #2d3436;
-    --text-sub: #4b5563;
-    --muted: #7f8c8d;
-    --accent: #00d2ff;
-    --accent-soft: rgba(0, 210, 255, 0.12);
-    --highlight: #ff4d94;
-    --divider: rgba(255, 133, 162, 0.22);
-    --up: #00b894;
-    --down: #e84393;
-    --title: #4834d4;
+    --bg: #f6f4ef;
+    --ink: #0f1115;
+    --ink-2: #3b3f47;
+    --muted: #6b7280;
+    --line: rgba(15,17,21,0.08);
+    --line-strong: rgba(15,17,21,0.14);
+    --card-radius: 24px;
+    --c-events:   #ffd9e0;
+    --c-events-2: #ff5a7a;
+    --c-twitter:  #e3dcff;
+    --c-twitter-2:#7a5cff;
+    --c-macro:    #ffe8c2;
+    --c-macro-2:  #ff8a3d;
+    --c-archive:  #dfeaff;
+    --c-archive-2:#2f6bff;
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html, body { margin: 0; padding: 0; }
   body {
-    margin: 0;
-    font-family: '''Inter''', '''Noto Sans KR''', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg-gradient);
-    background-attachment: fixed;
-    color: var(--text);
-    line-height: 1.7;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
     -webkit-font-smoothing: antialiased;
-    font-size: 16px;
   }
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 32px 20px 72px;
+  a { color: inherit; text-decoration: none; }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(246,244,239,0.88);
+    backdrop-filter: saturate(160%) blur(12px);
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 1px solid var(--line);
   }
-  .price-ticker {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    gap: 10px;
-    margin-bottom: 28px;
+  .ticker {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 24px;
+    overflow-x: auto; scrollbar-width: none;
   }
-  .price-card {
-    display: flex;
-    flex-direction: column;
-    padding: 12px 14px;
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid #fff;
-    border-radius: 18px;
-    text-decoration: none;
-    box-shadow: 0 4px 14px rgba(72, 52, 212, 0.08);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  .ticker::-webkit-scrollbar { display: none; }
+  .ticker-label {
+    font-size: 11px; letter-spacing: 0.12em;
+    color: var(--muted); font-weight: 700;
+    text-transform: uppercase; margin-right: 6px; white-space: nowrap;
   }
-  .price-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(72, 52, 212, 0.15);
-  }
-  .price-symbol {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--highlight);
-    letter-spacing: 0.05em;
-  }
-  .price-value {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--title);
-    margin-top: 2px;
-  }
-  .price-change {
-    font-size: 12px;
-    font-weight: 600;
-    margin-top: 2px;
-    color: var(--muted);
-  }
-  .price-change.up { color: var(--up); }
-  .price-change.down { color: var(--down); }
-  header {
-    padding-bottom: 22px;
-    margin-bottom: 26px;
-    border-bottom: 2px dashed var(--border);
-    text-align: center;
-  }
-  h1 {
-    font-size: 32px;
-    font-weight: 700;
-    margin: 0 0 10px;
-    color: var(--title);
-    letter-spacing: -0.03em;
-    text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(255, 133, 162, 0.3);
-  }
-  .updated {
-    color: var(--text-sub);
-    font-size: 13px;
-    font-weight: 500;
+  .tk {
+    display: inline-flex; align-items: baseline; gap: 8px;
+    padding: 8px 14px;
     background: #fff;
-    display: inline-block;
-    padding: 3px 12px;
-    border-radius: 4px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    cursor: pointer;
   }
-  .nav {
-    margin-top: 18px;
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
+  .tk:hover { transform: translateY(-1px); border-color: var(--line-strong); box-shadow: 0 4px 12px rgba(15,17,21,0.06); }
+  .tk .sym { font-weight: 800; font-size: 13px; letter-spacing: 0.01em; }
+  .tk .px  { color: var(--ink-2); font-size: 13px; font-weight: 600; }
+  .tk .ch  { font-size: 12px; font-weight: 700; padding: 2px 6px; border-radius: 6px; }
+  .tk .ch.up   { color: #0a7a4b; background: #e5f6ee; }
+  .tk .ch.down { color: #b0253a; background: #fde8ec; }
+  .tk-loading { color: var(--muted); font-size: 13px; }
+
+  /* ── HEADER ── */
+  header.site {
+    max-width: 1280px; margin: 0 auto;
+    padding: 36px 24px 14px;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap;
   }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand .mark {
+    width: 52px; height: 52px; border-radius: 16px;
+    background: linear-gradient(135deg, #0f1115, #2a2f3a);
+    display: grid; place-items: center;
+    color: #fff; font-size: 26px;
+    box-shadow: 0 8px 24px rgba(15,17,21,0.12);
+  }
+  .brand h1 {
+    font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+    font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin: 0;
+  }
+  .brand .sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .nav { display: flex; gap: 6px; align-items: center; }
   .nav a {
-    padding: 8px 18px;
-    background: #fff;
-    border: 2px solid var(--border);
-    border-radius: 50px;
-    color: var(--border);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 700;
-    transition: all 0.2s ease;
-    box-shadow: 3px 3px 0px var(--border);
+    padding: 10px 16px;
+    font-size: 14px; font-weight: 600;
+    border-radius: 999px;
+    color: var(--ink-2);
+    transition: background .18s ease, color .18s ease;
   }
-  .nav a:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 5px 5px 0px var(--border);
-    background: var(--accent-soft);
+  .nav a.active { background: var(--ink); color: #fff; }
+  .nav a:not(.active):hover { background: rgba(15,17,21,0.06); }
+
+  /* ── BENTO ── */
+  main {
+    max-width: 1280px; margin: 0 auto;
+    padding: 16px 24px 80px;
   }
-  .digest-section {
-    background: var(--card);
-    border: 2px solid #fff;
-    border-radius: 22px;
-    padding: 24px 26px;
-    margin-bottom: 16px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 10px 25px rgba(72, 52, 212, 0.06);
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 120px;
+    gap: 20px;
   }
-  .digest-section h2 {
-    font-size: 18px;
-    font-weight: 700;
-    margin: 0 0 14px;
-    color: var(--highlight);
-    display: flex;
-    align-items: center;
-    gap: 6px;
+  .card-events  { grid-column: span 8; grid-row: span 4; }
+  .card-twitter { grid-column: span 4; grid-row: span 4; }
+  .card-macro   { grid-column: span 8; grid-row: span 4; }
+  .card-archive { grid-column: 9 / span 4; grid-row: span 4; }
+
+  /* ── CARD BASE ── */
+  .card {
+    position: relative;
+    border-radius: var(--card-radius);
+    padding: 28px;
+    overflow: hidden;
+    transition: transform .28s cubic-bezier(.2,.7,.3,1), box-shadow .28s ease;
+    display: flex; flex-direction: column;
+    min-height: 100%;
+    isolation: isolate;
   }
-  .digest-section ul { margin: 0; padding: 0; list-style: none; }
-  .digest-section li {
-    padding: 11px 0;
-    border-bottom: 1px solid var(--divider);
-    font-size: 15px;
-    color: var(--text-sub);
-    line-height: 1.65;
+  .card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -12px rgba(15,17,21,0.18); }
+  .card-events  { background: var(--c-events); }
+  .card-twitter { background: var(--c-twitter); }
+  .card-macro   { background: var(--c-macro); }
+  .card-archive { background: var(--c-archive); }
+
+  .card .deco { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .card .deco svg { position: absolute; }
+  .card > :not(.deco) { position: relative; z-index: 1; }
+
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    align-self: flex-start;
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 999px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    margin-bottom: 14px;
   }
-  .digest-section li:last-child { border-bottom: none; }
-  .digest-section li:first-child { padding-top: 2px; }
-  .digest-section a {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 600;
-    border-bottom: 1.5px solid var(--accent);
+  .count-pill {
+    background: rgba(0,0,0,0.12); border-radius: 999px;
+    padding: 1px 6px; font-size: 10px;
   }
-  strong {
-    color: var(--highlight);
-    font-weight: 700;
-    background: linear-gradient(to top, rgba(255, 77, 148, 0.12) 40%, transparent 40%);
-    padding: 0 2px;
+  .card h2 {
+    font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+    font-size: 20px; font-weight: 800; letter-spacing: -0.02em;
+    margin: 0 0 8px; line-height: 1.25;
   }
-  .archive {
-    margin-top: 30px;
-    padding: 22px 26px;
-    background: var(--card);
-    border: 2px solid #fff;
-    border-radius: 22px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 10px 25px rgba(72, 52, 212, 0.06);
+  .lede {
+    font-size: 13.5px; color: var(--ink-2); line-height: 1.6;
+    margin: 0 0 16px;
   }
-  .archive h2 {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--highlight);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin: 0 0 12px;
+
+  /* peek list */
+  .peek { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .peek .row {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 13.5px; line-height: 1.45; color: var(--ink-2);
   }
-  .archive ul { list-style: none; padding: 0; margin: 0; }
-  .archive li {
-    padding: 8px 0;
-    border-bottom: 1px solid var(--divider);
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    flex-shrink: 0; margin-top: 4px;
   }
-  .archive li:last-child { border-bottom: none; }
-  .archive a {
-    color: var(--text-sub);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
+  .dot.red    { background: #e84040; }
+  .dot.yellow { background: #f0a020; }
+  .dot.green  { background: #1db87a; }
+  .dot.blue   { background: #2f6bff; }
+  .peek .t a { color: var(--c-events-2); font-weight: 600; border-bottom: 1px solid currentColor; }
+  .card-twitter .peek .t a  { color: var(--c-twitter-2); }
+  .card-macro   .peek .t a  { color: var(--c-macro-2); }
+  .card-archive .peek .row  { border-bottom: 1px solid rgba(15,17,21,0.06); padding-bottom: 8px; }
+  .card-archive .peek .row:last-child { border-bottom: none; }
+  .card-archive a.row { transition: opacity .15s; }
+  .card-archive a.row:hover { opacity: .7; }
+
+  /* tags (twitter card) */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 12px; }
+  .tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 7px 12px;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,255,255,0.8);
+    border-radius: 999px;
+    font-size: 13px; font-weight: 700;
+    transition: background .18s ease;
   }
-  .archive a:hover { color: var(--accent); }
-  footer {
-    margin-top: 34px;
-    text-align: center;
-    color: var(--text-sub);
-    font-size: 12px;
-    font-weight: 500;
+  .tag:hover { background: rgba(255,255,255,0.85); }
+  .arrow { font-size: 11px; opacity: .7; }
+  .tag strong { color: var(--c-twitter-2); }
+
+  /* divider inside card */
+  .divider {
+    height: 1px;
+    background: rgba(15,17,21,0.08);
+    margin: 12px 0;
   }
-  @media (max-width: 560px) {
-    .container { padding: 20px 16px 56px; }
-    h1 { font-size: 26px; }
-    .digest-section { padding: 20px; border-radius: 18px; }
-    .digest-section h2 { font-size: 16px; }
-    .digest-section li { font-size: 14.5px; }
-    .archive { padding: 18px 20px; }
-    .price-ticker {
-      grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
-      gap: 7px;
-    }
-    .price-card { padding: 10px 12px; border-radius: 14px; }
-    .price-value { font-size: 14px; }
+
+  /* footer */
+  footer.site {
+    max-width: 1280px; margin: 0 auto;
+    padding: 24px; display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px;
+    font-size: 12px; color: var(--muted);
+    border-top: 1px solid var(--line);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 980px) {
+    .bento { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 100px; gap: 14px; }
+    .card-events  { grid-column: span 6; grid-row: span 5; }
+    .card-twitter { grid-column: span 6; grid-row: span 4; }
+    .card-macro   { grid-column: span 6; grid-row: span 5; }
+    .card-archive { grid-column: span 6; grid-row: span 3; }
+    header.site { padding: 24px 16px 12px; }
+    main { padding: 12px 16px 60px; }
+  }
+  @media (max-width: 620px) {
+    .bento { grid-template-columns: 1fr; grid-auto-rows: auto; gap: 12px; }
+    .card-events, .card-twitter, .card-macro, .card-archive { grid-column: 1; grid-row: auto; }
+    .card { padding: 22px; }
+    .card h2 { font-size: 18px; }
+    .brand h1 { font-size: 22px; }
   }
 </style>
 </head>
 <body>
-<div class="container">
-  
-  <div class="price-ticker">
 
-    <a href="https://coinmarketcap.com/currencies/bitcoin/" target="_blank" class="price-card">
-      <span class="price-symbol">BTC</span>
-      <span class="price-value">$77,481.00</span>
-      <span class="price-change up">+2.52%</span>
-    </a>
-    <a href="https://coinmarketcap.com/currencies/ethereum/" target="_blank" class="price-card">
-      <span class="price-symbol">ETH</span>
-      <span class="price-value">$2,365.49</span>
-      <span class="price-change up">+2.72%</span>
-    </a>
-    <a href="https://coinmarketcap.com/currencies/hyperliquid/" target="_blank" class="price-card">
-      <span class="price-symbol">HYPE</span>
-      <span class="price-value">$40.24</span>
-      <span class="price-change down">-1.34%</span>
-    </a>
-    <a href="https://coinmarketcap.com/currencies/solana/" target="_blank" class="price-card">
-      <span class="price-symbol">SOL</span>
-      <span class="price-value">$87.50</span>
-      <span class="price-change up">+2.76%</span>
-    </a>
-    <a href="https://coinmarketcap.com/currencies/xrp/" target="_blank" class="price-card">
-      <span class="price-symbol">XRP</span>
-      <span class="price-value">$1.45</span>
-      <span class="price-change up">+1.68%</span>
-    </a>
+<!-- 실시간 시세 ticker -->
+<div class="ticker-wrap">
+  <div class="ticker" id="ticker-bar">
+    <span class="ticker-label">LIVE</span>
+    <span class="tk-loading">시세 불러오는 중...</span>
   </div>
-
-  <header>
-    <h1>🐬 코인 브리핑</h1>
-    <div class="updated">업데이트: 총 26개 뉴스 요약</div>
-    <nav class="nav">
-      <a href="./index.html">최신</a>
-      <a href="./archive.html">전체 아카이브</a>
-    </nav>
-  </header>
-  <main>
-    
-<section class="digest-section">
-  <h2>전체 뉴스 요약 아카이브</h2>
-  <ul>
-    <li><a href="./archive/2026-04-22-1224.html">2026-04-22 12:24 KST</a></li>
-    <li><a href="./archive/2026-04-21-1226.html">2026-04-21 12:26 KST</a></li>
-    <li><a href="./archive/2026-04-20-1233.html">2026-04-20 12:33 KST</a></li>
-    <li><a href="./archive/2026-04-19-1232.html">2026-04-19 12:32 KST</a></li>
-    <li><a href="./archive/2026-04-18-1156.html">2026-04-18 11:56 KST</a></li>
-    <li><a href="./archive/2026-04-17-2149.html">2026-04-17 21:49 KST</a></li>
-    <li><a href="./archive/2026-04-17-2107.html">2026-04-17 21:07 KST</a></li>
-    <li><a href="./archive/2026-04-17-2054.html">2026-04-17 20:54 KST</a></li>
-    <li><a href="./archive/2026-04-17-1503.html">2026-04-17 15:03 KST</a></li>
-    <li><a href="./archive/2026-04-17-0834.html">2026-04-17 08:34 KST</a></li>
-    <li><a href="./archive/2026-04-16-2059.html">2026-04-16 20:59 KST</a></li>
-    <li><a href="./archive/2026-04-16-1609.html">2026-04-16 16:09 KST</a></li>
-    <li><a href="./archive/2026-04-16-1500.html">2026-04-16 15:00 KST</a></li>
-    <li><a href="./archive/2026-04-16-0836.html">2026-04-16 08:36 KST</a></li>
-    <li><a href="./archive/2026-04-15-2057.html">2026-04-15 20:57 KST</a></li>
-    <li><a href="./archive/2026-04-15-1500.html">2026-04-15 15:00 KST</a></li>
-    <li><a href="./archive/2026-04-15-0837.html">2026-04-15 08:37 KST</a></li>
-    <li><a href="./archive/2026-04-15-0346.html">2026-04-15 03:46 KST</a></li>
-    <li><a href="./archive/2026-04-15-0334.html">2026-04-15 03:34 KST</a></li>
-    <li><a href="./archive/2026-04-15-0237.html">2026-04-15 02:37 KST</a></li>
-    <li><a href="./archive/2026-04-15-0214.html">2026-04-15 02:14 KST</a></li>
-    <li><a href="./archive/2026-04-14-2057.html">2026-04-14 20:57 KST</a></li>
-    <li><a href="./archive/2026-04-14-1500.html">2026-04-14 15:00 KST</a></li>
-    <li><a href="./archive/2026-04-14-0836.html">2026-04-14 08:36 KST</a></li>
-    <li><a href="./archive/2026-04-13-2103.html">2026-04-13 21:03 KST</a></li>
-    <li><a href="./archive/2026-04-13-1647.html">2026-04-13 16:47 KST</a></li>
-  </ul>
-</section>
-
-  </main>
-  
-  <footer>
-    Generated by News Bot · Powered by Claude
-  </footer>
 </div>
+
+<header class="site">
+  <div class="brand">
+    <div class="mark">🐬</div>
+    <div>
+      <h1>코인 브리핑</h1>
+      <div class="sub">업데이트: 총 27개 뉴스 요약</div>
+    </div>
+  </div>
+  <nav class="nav">
+    <a href="./index.html" class="active">최신</a>
+    <a href="./archive.html">전체 아카이브</a>
+  </nav>
+</header>
+
+<main>
+  <div class="bento">
+    
+    <div class="card card-events" style="grid-column:1/-1;grid-row:auto;">
+      <span class="chip">📰 전체 뉴스 요약 아카이브</span>
+      <h2>전체 브리핑 목록 (27개)</h2>
+      <div class="peek">
+    <a class="row" href="./archive/2026-04-22-1253.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-22 12:53 KST</span></a>
+    <a class="row" href="./archive/2026-04-22-1224.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-22 12:24 KST</span></a>
+    <a class="row" href="./archive/2026-04-21-1226.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-21 12:26 KST</span></a>
+    <a class="row" href="./archive/2026-04-20-1233.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-20 12:33 KST</span></a>
+    <a class="row" href="./archive/2026-04-19-1232.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-19 12:32 KST</span></a>
+    <a class="row" href="./archive/2026-04-18-1156.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-18 11:56 KST</span></a>
+    <a class="row" href="./archive/2026-04-17-2149.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-17 21:49 KST</span></a>
+    <a class="row" href="./archive/2026-04-17-2107.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-17 21:07 KST</span></a>
+    <a class="row" href="./archive/2026-04-17-2054.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-17 20:54 KST</span></a>
+    <a class="row" href="./archive/2026-04-17-1503.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-17 15:03 KST</span></a>
+    <a class="row" href="./archive/2026-04-17-0834.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-17 08:34 KST</span></a>
+    <a class="row" href="./archive/2026-04-16-2059.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-16 20:59 KST</span></a>
+    <a class="row" href="./archive/2026-04-16-1609.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-16 16:09 KST</span></a>
+    <a class="row" href="./archive/2026-04-16-1500.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-16 15:00 KST</span></a>
+    <a class="row" href="./archive/2026-04-16-0836.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-16 08:36 KST</span></a>
+    <a class="row" href="./archive/2026-04-15-2057.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-15 20:57 KST</span></a>
+    <a class="row" href="./archive/2026-04-15-1500.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-15 15:00 KST</span></a>
+    <a class="row" href="./archive/2026-04-15-0837.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-15 08:37 KST</span></a>
+    <a class="row" href="./archive/2026-04-15-0346.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-15 03:46 KST</span></a>
+    <a class="row" href="./archive/2026-04-15-0334.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-15 03:34 KST</span></a>
+    <a class="row" href="./archive/2026-04-15-0237.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-15 02:37 KST</span></a>
+    <a class="row" href="./archive/2026-04-15-0214.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-15 02:14 KST</span></a>
+    <a class="row" href="./archive/2026-04-14-2057.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-14 20:57 KST</span></a>
+    <a class="row" href="./archive/2026-04-14-1500.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-14 15:00 KST</span></a>
+    <a class="row" href="./archive/2026-04-14-0836.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-14 08:36 KST</span></a>
+    <a class="row" href="./archive/2026-04-13-2103.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-13 21:03 KST</span></a>
+    <a class="row" href="./archive/2026-04-13-1647.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-13 16:47 KST</span></a>
+      </div>
+    </div>
+    
+  </div>
+</main>
+
+<footer class="site">
+  <div>Generated by News Bot · Powered by Claude</div>
+  <div>🐬 코인 브리핑 · 2026</div>
+</footer>
+
+<!-- 실시간 시세 JS -->
+<script>
+(function() {
+  var COINS = [{"id":"bitcoin","sym":"BTC","cmc":"bitcoin"},{"id":"ethereum","sym":"ETH","cmc":"ethereum"},{"id":"hyperliquid","sym":"HYPE","cmc":"hyperliquid"},{"id":"solana","sym":"SOL","cmc":"solana"},{"id":"ripple","sym":"XRP","cmc":"xrp"}];
+  var CMC_BASE = 'https://coinmarketcap.com/currencies/';
+
+  function fmt(price) {
+    if (price >= 1000) return '$' + price.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+    if (price >= 1)    return '$' + price.toFixed(2);
+    return '$' + price.toFixed(4);
+  }
+
+  function render(data) {
+    var bar = document.getElementById('ticker-bar');
+    var html = '<span class="ticker-label">LIVE</span>';
+    COINS.forEach(function(c) {
+      var d = data[c.id];
+      if (!d) return;
+      var price = d.usd;
+      var ch = d.usd_24h_change;
+      var cls = ch >= 0 ? 'up' : 'down';
+      var sign = ch >= 0 ? '+' : '';
+      html += '<a href="' + CMC_BASE + c.cmc + '/" target="_blank" class="tk">' +
+        '<span class="sym">' + c.sym + '</span>' +
+        '<span class="px">' + fmt(price) + '</span>' +
+        '<span class="ch ' + cls + '">' + sign + ch.toFixed(2) + '%</span>' +
+        '</a>';
+    });
+    bar.innerHTML = html;
+  }
+
+  function fetchPrices() {
+    var ids = COINS.map(function(c){ return c.id; }).join(',');
+    fetch('https://api.coingecko.com/api/v3/simple/price?ids=' + ids + '&vs_currencies=usd&include_24hr_change=true')
+      .then(function(r){ return r.json(); })
+      .then(render)
+      .catch(function(e){
+        var bar = document.getElementById('ticker-bar');
+        if (bar.querySelector('.tk-loading')) {
+          bar.querySelector('.tk-loading').textContent = '시세 로드 실패 (잠시 후 재시도)';
+        }
+      });
+  }
+
+  fetchPrices();
+  setInterval(fetchPrices, 60000);
+})();
+</script>
+
 </body>
 </html>
