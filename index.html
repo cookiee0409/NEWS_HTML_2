@@ -24,6 +24,15 @@
     --c-macro-2:  #ff8a3d;
     --c-archive:  #dfeaff;
     --c-archive-2:#2f6bff;
+    /* 일반 뉴스 페이지용 */
+    --c-news:     #d8e6ff;
+    --c-news-2:   #2f6bff;
+    --c-econ:     #d8f0e1;
+    --c-econ-2:   #1db87a;
+    --c-tech:     #d4f0f5;
+    --c-tech-2:   #0aa6c2;
+    --c-feed:     #e3dcff;
+    --c-feed-2:   #a28cff;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -176,6 +185,11 @@
   .card-macro   { grid-column: span 7; }
   /* 아카이브: 항상 오른쪽 2번째 행에 */
   .card-archive { grid-column: 8 / span 5; grid-row: 2; }
+  /* 일반 뉴스 페이지 카드 */
+  .card-news    { grid-column: span 7; }
+  .card-econ    { grid-column: span 5; }
+  .card-tech    { grid-column: span 7; }
+  .card-feed    { grid-column: span 5; }
 
   /* ── CARD BASE ── */
   .card {
@@ -192,6 +206,10 @@
   .card-twitter { background: var(--c-twitter); }
   .card-macro   { background: var(--c-macro); }
   .card-archive { background: var(--c-archive); }
+  .card-news    { background: var(--c-news); }
+  .card-econ    { background: var(--c-econ); }
+  .card-tech    { background: var(--c-tech); }
+  .card-feed    { background: var(--c-feed); }
 
   .card .deco { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
   .card .deco svg { position: absolute; }
@@ -249,6 +267,10 @@
   .card-twitter .peek a.row:hover { background: rgba(122,92,255,0.08); }
   .card-macro   .peek a.row:hover { background: rgba(255,138,61,0.08); }
   .card-archive .peek a.row:hover { background: rgba(47,107,255,0.08); }
+  .card-news    .peek a.row:hover { background: rgba(47,107,255,0.08); }
+  .card-econ    .peek a.row:hover { background: rgba(29,184,122,0.08); }
+  .card-tech    .peek a.row:hover { background: rgba(10,166,194,0.10); }
+  .card-feed    .peek a.row:hover { background: rgba(162,140,255,0.10); }
 
   /* tags (twitter card) */
   .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 12px; }
@@ -288,12 +310,17 @@
     .card-twitter { grid-column: span 6; }
     .card-macro   { grid-column: span 6; }
     .card-archive { grid-column: span 6; grid-row: auto; }
+    .card-news    { grid-column: span 6; }
+    .card-econ    { grid-column: span 6; }
+    .card-tech    { grid-column: span 6; }
+    .card-feed    { grid-column: span 6; }
     header.site { padding: 24px 16px 12px; }
     main { padding: 12px 16px 60px; }
   }
   @media (max-width: 620px) {
     .bento { grid-template-columns: 1fr; gap: 12px; }
-    .card-events, .card-twitter, .card-macro, .card-archive {
+    .card-events, .card-twitter, .card-macro, .card-archive,
+    .card-news, .card-econ, .card-tech, .card-feed {
       grid-column: 1; grid-row: auto;
     }
     .card { padding: 20px; }
@@ -321,12 +348,13 @@
     <div class="mark">🐬</div>
     <div>
       <h1>코인 브리핑</h1>
-      <div class="sub">업데이트: 2026-05-04 12:50 KST</div>
+      <div class="sub">업데이트: 2026-05-04 17:59 KST</div>
     </div>
   </div>
   <nav class="nav">
-    <a href="./index.html" class="active">최신</a>
-    <a href="./archive.html">전체 아카이브</a>
+    <a href="./index.html" class="active">코인</a>
+    <a href="./general/index.html" >일반 뉴스</a>
+    <a href="./archive.html">아카이브</a>
   </nav>
 </header>
 
@@ -335,43 +363,44 @@
     <div class="card card-events">
   <div class="deco"><svg class="float" width="200" height="200" viewBox="0 0 200 200" style="top:-40px;right:-40px;opacity:.35"><circle cx="100" cy="100" r="100" fill="#ff5a7a"/></svg></div>
   <span class="chip">🚨 사건·사고·주요 뉴스 <span class="count-pill">6개</span></span>
-  <h2>BTC $80K 돌파 · DeFi $292M 해킹 경고</h2>
-  <p class="lede">트럼프 '프로젝트 프리덤' 발표 후 비트코인이 아시아 시장서 $80,000 터치. 한편 DeFi 취약점을 겨냥한 $292M 규모 해킹이 업계 보안 개선 요구를 촉발했고, Strategy는 Q1 실적 발표 앞두고 BTC 매수를 일시 중단했다.</p>
+  <h2><strong>$BTC</strong> 8만 달러 돌파 — 1월 이후 최고가</h2>
+  <p class="lede">비트코인이 $80,000을 재탈환하며 1월 이후 최고치를 기록했다. ETF 유입 회복세가 이어지는 가운데 트레이더들은 추가 돌파에 여전히 신중한 입장이다. 4월 한 달간 지난 12개월 최강 월간 상승률을 기록했으나, CryptoQuant는 선물 주도 랠리를 경고했다.</p>
   <div class="peek">
-    <a class="row" href="https://beincrypto.com/bitcoin-80k-trump-project-freedom-hormuz/" target="_blank"><span class="dot green"></span><span class="t"><strong>$BTC</strong> $80,000 터치 — 트럼프 '프로젝트 프리덤' 발표 후 랠리</span></a>
-    <a class="row" href="https://www.coindesk.com/business/2026/05/02/the-usd292m-crypto-hack-exposed-defi-s-weak-spots-here-s-what-must-change-insiders-say" target="_blank"><span class="dot red"></span><span class="t">DeFi $292M 해킹 — 업계 보안 취약점 전면 노출</span></a>
-    <a class="row" href="https://www.theblock.co/post/399828/strategy-pauses-bitcoin-purchase-q1-earnings" target="_blank"><span class="dot yellow"></span><span class="t">Strategy, Q1 실적 발표 앞두고 <strong>$BTC</strong> 매수 일시 중단</span></a>
-    <a class="row" href="https://cointelegraph.com/news/new-york-forces-uphold-to-pay-5m-over-fraudulent-crypto-investment-scheme" target="_blank"><span class="dot red"></span><span class="t">뉴욕주, Uphold에 $500만 제재 — 사기 수익상품 판매 위반</span></a>
-    <a class="row" href="https://www.theblock.co/post/399819/north-korea-terrorism-creditors-move-to-seize-arbitrum-frozen-kelp-dao-eth-ahead-of-defi-united-vote" target="_blank"><span class="dot red"></span><span class="t">북한 테러 피해 채권자, Arbitrum 동결 Kelp DAO <strong>$ETH</strong> 압류 시도</span></a>
-    <a class="row" href="https://cointelegraph.com/news/ethereum-foundation-sells-another-10000-eth-to-bitmine-in-third-otc-deal" target="_blank"><span class="dot yellow"></span><span class="t">이더리움 재단, BitMine에 10,000 <strong>$ETH</strong> 추가 매각 (세 번째 OTC)</span></a>
+    <a class="row" href="https://cointelegraph.com/news/bitcoin-climbs-past-80k-for-the-first-time-since-january" target="_blank"><span class="dot green"></span><span class="t"><strong>$BTC</strong> $80,000 돌파 — 1월 이후 처음</span></a>
+    <a class="row" href="https://www.coindesk.com/markets/2026/05/04/the-bitcoin-etf-recovery-in-flows-is-real-it-is-just-not-complete-yet" target="_blank"><span class="dot yellow"></span><span class="t"><strong>$BTC</strong> ETF 유입 회복 중이지만 아직 완전하지 않아</span></a>
+    <a class="row" href="https://www.coindesk.com/business/2026/05/04/strategy-pauses-bitcoin-buys-before-tuesday-earnings" target="_blank"><span class="dot yellow"></span><span class="t">Strategy, 화요일 실적 발표 앞두고 <strong>$BTC</strong> 매수 일시 중단</span></a>
+    <a class="row" href="https://www.theblock.co/post/399790/cryptoquant-bitcoin-april-price-surge-speculative-spot-demand-weak-correction-risk" target="_blank"><span class="dot red"></span><span class="t">CryptoQuant "4월 랠리는 투기적, 현물 수요 약해 조정 위험"</span></a>
+    <a class="row" href="https://www.theblock.co/post/399819/north-korea-terrorism-creditors-move-to-seize-arbitrum-frozen-kelp-dao-eth-ahead-of-defi-united-vote" target="_blank"><span class="dot red"></span><span class="t">북한 테러 피해자 유족, Kelp DAO 동결 <strong>$ETH</strong> 압류 시도</span></a>
+    <a class="row" href="https://www.coindesk.com/business/2026/05/02/the-usd292m-crypto-hack-exposed-defi-s-weak-spots-here-s-what-must-change-insiders-say" target="_blank"><span class="dot red"></span><span class="t">$292M DeFi 해킹 — 취약점 노출, 업계 대응책 촉구</span></a>
   </div>
 </div>
 
 <div class="card card-twitter">
   <div class="deco"><svg class="float" width="140" height="140" viewBox="0 0 140 140" style="top:-20px;right:-30px;opacity:.55"><circle cx="70" cy="70" r="70" fill="#a28cff"/></svg></div>
   <span class="chip">🔥 트위터 화제</span>
-  <h2>$BTC · $PENGU · $MON 주목</h2>
-  <p class="lede">지난 24시간 가장 많이 언급된 토큰들. BTC는 $80K 돌파 기대감으로, PENGU·MON은 NFT·레이어2 내러티브로 급부상.</p>
+  <h2><strong>$BTC</strong> · <strong>$SOL</strong> · <strong>$LUNC</strong> 주목</h2>
+  <p class="lede">지난 24시간 가장 많이 언급된 토큰들. 비트코인 8만 달러 돌파에 시장 전반이 들썩이고, 솔라나·루나클래식이 트렌딩 상위권을 유지 중이다.</p>
   <div class="tags">
-    <a class="tag" href="https://www.coingecko.com/en/coins/bitcoin" target="_blank"><strong>$BTC</strong> — $80K 돌파 직전, 1월 이후 최고 주봉 마감 기대 <span class="arrow">↗</span></a>
-    <a class="tag" href="https://www.coingecko.com/en/coins/pudgy-penguins" target="_blank"><strong>$PENGU</strong> — Pudgy Penguins NFT 생태계 확장 기대로 재부각 <span class="arrow">↗</span></a>
-    <a class="tag" href="https://www.coingecko.com/en/coins/monad" target="_blank"><strong>$MON</strong> — Monad 메인넷 기대감, L2 내러티브 수혜 <span class="arrow">↗</span></a>
-    <a class="tag" href="https://www.coingecko.com/en/coins/megaeth" target="_blank"><strong>$MEGA</strong> — MegaETH 고성능 EVM 체인 관심 급증 <span class="arrow">↗</span></a>
-    <a class="tag" href="https://www.coingecko.com/en/coins/gensyn" target="_blank"><strong>$AI</strong> — Gensyn 분산 AI 컴퓨팅 내러티브 부상 <span class="arrow">↗</span></a>
+    <a class="tag" href="https://www.coingecko.com/en/coins/bitcoin" target="_blank"><strong>$BTC</strong> — $80K 돌파, 1월 이후 최고가 경신 <span class="arrow">↗</span></a>
+    <a class="tag" href="https://www.coingecko.com/en/coins/solana" target="_blank"><strong>$SOL</strong> — 시장 반등 속 트렌딩 7위 유지 <span class="arrow">↗</span></a>
+    <a class="tag" href="https://www.coingecko.com/en/coins/terra-luna" target="_blank"><strong>$LUNC</strong> — 트렌딩 104위, 커뮤니티 재점화 <span class="arrow">↗</span></a>
+    <a class="tag" href="https://www.coingecko.com/en/coins/ondo-finance" target="_blank"><strong>$ONDO</strong> — RWA 토큰화 내러티브 부각, 54위 <span class="arrow">↗</span></a>
+    <a class="tag" href="https://www.coingecko.com/en/coins/pudgy-penguins" target="_blank"><strong>$PENGU</strong> — NFT 연계 밈 모멘텀 지속 <span class="arrow">↗</span></a>
+    <a class="tag" href="https://www.coingecko.com/en/coins/megaeth" target="_blank"><strong>$MEGA</strong> — MegaETH 출시 기대감 트렌딩 <span class="arrow">↗</span></a>
   </div>
 </div>
 
 <div class="card card-macro">
   <div class="deco"><svg class="float d2" width="120" height="120" viewBox="0 0 120 120" style="top:-25px;left:-25px;opacity:.55"><circle cx="60" cy="60" r="60" fill="#ff8a3d"/></svg></div>
   <span class="chip">🌍 거시·매크로 <span class="count-pill">5개</span></span>
-  <h2>CLARITY Act 타결 · S&P 500 신고가</h2>
-  <p class="lede">미 상원 CLARITY Act 스테이블코인 수익 규정 합의 완료로 법안 처리에 청신호. S&P 500은 신기록을 경신했고, 브라질 중앙은행은 국경간 결제에서 스테이블코인 사용을 전면 금지했다.</p>
+  <h2>CLARITY Act 진전 · 브라질 스테이블코인 금지</h2>
+  <p class="lede">미국 상원 CLARITY Act 스테이블코인 이자 조항 합의로 입법 탄력이 붙었다. 브라질 중앙은행은 국경간 결제에서 스테이블코인·크립토 정산을 금지했다. S&P 500은 신고가를 경신하며 위험자산 선호 심리가 강화되고 있다.</p>
   <div class="peek">
-    <a class="row" href="https://www.theblock.co/post/399780/coinbase-says-deal-reached-on-clarity-act-stablecoin-yield-clearing-path-to-long-stalled-senate-markup" target="_blank"><span class="dot green"></span><span class="t">CLARITY Act 스테이블코인 수익 규정 합의 — 상원 심사 가속</span></a>
-    <a class="row" href="https://www.coindesk.com/markets/2026/05/02/bitcoin-above-usd78-000-as-senate-clears-clarity-act-yield-hurdle-s-and-p-500-sets-new-record" target="_blank"><span class="dot green"></span><span class="t">S&P 500 신고가 경신 — <strong>$BTC</strong> $78,000 상회 동반 상승</span></a>
-    <a class="row" href="https://www.coindesk.com/policy/2026/05/02/brazil-s-central-bank-bans-stablecoin-and-crypto-settlement-in-cross-border-payments" target="_blank"><span class="dot red"></span><span class="t">브라질 중앙은행, 국경간 결제 스테이블코인 전면 금지</span></a>
-    <a class="row" href="https://www.theblock.co/post/399812/blackrock-urges-occ-to-drop-tokenized-reserve-cap-idea-expand-eligible-assets-in-genius-act-comment-letter" target="_blank"><span class="dot yellow"></span><span class="t">블랙록, OCC에 토큰화 준비금 20% 상한 철폐 요구</span></a>
-    <a class="row" href="https://www.theblock.co/post/399790/cryptoquant-bitcoin-april-price-surge-speculative-spot-demand-weak-correction-risk" target="_blank"><span class="dot yellow"></span><span class="t">CryptoQuant: 4월 <strong>$BTC</strong> 랠리는 투기성 — 현물 수요 약세, 조정 경고</span></a>
+    <a class="row" href="https://www.theblock.co/post/399780/coinbase-says-deal-reached-on-clarity-act-stablecoin-yield-clearing-path-to-long-stalled-senate-markup" target="_blank"><span class="dot green"></span><span class="t">CLARITY Act 스테이블코인 이자 합의 — 상원 심의 길 열려</span></a>
+    <a class="row" href="https://www.coindesk.com/policy/2026/05/02/brazil-s-central-bank-bans-stablecoin-and-crypto-settlement-in-cross-border-payments" target="_blank"><span class="dot red"></span><span class="t">브라질 중앙은행, 국경간 결제 스테이블코인 사용 전면 금지</span></a>
+    <a class="row" href="https://www.theblock.co/post/399812/blackrock-urges-occ-to-drop-tokenized-reserve-cap-idea-expand-eligible-assets-in-genius-act-comment-letter" target="_blank"><span class="dot yellow"></span><span class="t">블랙록, GENIUS Act 토큰화 준비금 20% 상한 반대 의견 제출</span></a>
+    <a class="row" href="https://www.coindesk.com/markets/2026/05/04/jobs-data-earnings-calls-crypto-week-ahead" target="_blank"><span class="dot yellow"></span><span class="t">이번 주 고용지표·실적 발표 — 크립토 시장 변동성 주의</span></a>
+    <a class="row" href="https://www.theblock.co/post/399784/leading-iranian-crypto-exchange-nobitex-was-founded-by-sons-of-elite-political-family-tied-to-supreme-leaders-reuters" target="_blank"><span class="dot red"></span><span class="t">이란 최대 거래소 Nobitex, 최고지도자 연계 가문 설립 — 제재 우려</span></a>
   </div>
 </div>
     
@@ -382,6 +411,7 @@
       <span class="chip">📰 최근 아카이브</span>
       <h2>최근 브리핑 다시보기</h2>
       <div class="peek">
+    <a class="row" href="./archive/2026-05-04-1759.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-05-04 17:59</span></a>
     <a class="row" href="./archive/2026-05-04-1250.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-05-04 12:50</span></a>
     <a class="row" href="./archive/2026-05-03-1253.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-05-03 12:53</span></a>
     <a class="row" href="./archive/2026-05-02-1232.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-05-02 12:32</span></a>
@@ -389,7 +419,6 @@
     <a class="row" href="./archive/2026-04-30-1245.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-30 12:45</span></a>
     <a class="row" href="./archive/2026-04-29-1244.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-29 12:44</span></a>
     <a class="row" href="./archive/2026-04-28-1248.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-28 12:48</span></a>
-    <a class="row" href="./archive/2026-04-27-1242.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-27 12:42</span></a>
       </div>
     </div>
   </div>
