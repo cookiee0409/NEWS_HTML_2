@@ -182,14 +182,17 @@
   /* 고정 행 높이 없이 컨텐츠 길이에 맞게 자동 조정 */
   .card-events  { grid-column: span 7; }
   .card-twitter { grid-column: span 5; }
-  .card-macro   { grid-column: span 7; }
-  /* 아카이브: 항상 오른쪽 2번째 행에 */
-  .card-archive { grid-column: 8 / span 5; grid-row: 2; }
-  /* 일반 뉴스 페이지 카드 */
+  .card-macro   { grid-column: 1 / -1; }   /* 풀폭 */
+  /* 일반 뉴스 페이지 카드 (3개) */
   .card-news    { grid-column: span 7; }
   .card-econ    { grid-column: span 5; }
-  .card-tech    { grid-column: span 7; }
-  .card-feed    { grid-column: span 5; }
+  .card-tech    { grid-column: 1 / -1; }   /* 풀폭 */
+  /* 텔레그램 페이지 - 풀폭 1카드 */
+  .card-feed    { grid-column: 1 / -1; }
+  /* 통합 아카이브 페이지 - 모두 풀폭 */
+  .card-archive-coin { grid-column: 1 / -1; background: var(--c-events); }
+  .card-archive-news { grid-column: 1 / -1; background: var(--c-news); }
+  .card-archive-feed { grid-column: 1 / -1; background: var(--c-feed); }
 
   /* ── CARD BASE ── */
   .card {
@@ -306,23 +309,16 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 980px) {
     .bento { grid-template-columns: repeat(6, 1fr); gap: 14px; }
-    .card-events  { grid-column: span 6; }
-    .card-twitter { grid-column: span 6; }
-    .card-macro   { grid-column: span 6; }
-    .card-archive { grid-column: span 6; grid-row: auto; }
-    .card-news    { grid-column: span 6; }
-    .card-econ    { grid-column: span 6; }
-    .card-tech    { grid-column: span 6; }
-    .card-feed    { grid-column: span 6; }
+    .card-events, .card-twitter, .card-macro,
+    .card-news, .card-econ, .card-tech, .card-feed,
+    .card-archive-coin, .card-archive-news, .card-archive-feed {
+      grid-column: 1 / -1;
+    }
     header.site { padding: 24px 16px 12px; }
     main { padding: 12px 16px 60px; }
   }
   @media (max-width: 620px) {
     .bento { grid-template-columns: 1fr; gap: 12px; }
-    .card-events, .card-twitter, .card-macro, .card-archive,
-    .card-news, .card-econ, .card-tech, .card-feed {
-      grid-column: 1; grid-row: auto;
-    }
     .card { padding: 20px; }
     .card h2 { font-size: 18px; }
     .brand h1 { font-size: 22px; }
@@ -334,11 +330,11 @@
 <!-- 실시간 시세 ticker -->
 <div class="ticker-wrap">
   <div class="ticker" id="ticker-bar">
-    <span class="ticker-label">LIVE</span>
+    <span class="ticker-label">실시간 시세</span>
     <span class="tk-loading">시세 불러오는 중...</span>
   </div>
   <div class="ticker ticker-secondary" id="ticker-fx">
-    <span class="ticker-label">FX</span>
+    <span class="ticker-label">환율</span>
     <span class="tk-loading">환율·김프 불러오는 중...</span>
   </div>
 </div>
@@ -348,13 +344,14 @@
     <div class="mark">🐬</div>
     <div>
       <h1>코인 브리핑</h1>
-      <div class="sub">업데이트: 2026-05-04 17:59 KST</div>
+      <div class="sub">업데이트: 2026-05-04 20:26 KST</div>
     </div>
   </div>
   <nav class="nav">
-    <a href="./index.html" class="active">코인</a>
-    <a href="./general/index.html" >일반 뉴스</a>
-    <a href="./archive.html">아카이브</a>
+    <a href="./index.html" class="active">코인뉴스</a>
+    <a href="./general/index.html" >일반뉴스</a>
+    <a href="./telegram/index.html" >텔레그램 요약</a>
+    <a href="./archive.html" >아카이브</a>
   </nav>
 </header>
 
@@ -363,64 +360,45 @@
     <div class="card card-events">
   <div class="deco"><svg class="float" width="200" height="200" viewBox="0 0 200 200" style="top:-40px;right:-40px;opacity:.35"><circle cx="100" cy="100" r="100" fill="#ff5a7a"/></svg></div>
   <span class="chip">🚨 사건·사고·주요 뉴스 <span class="count-pill">6개</span></span>
-  <h2><strong>$BTC</strong> 8만 달러 돌파 — 1월 이후 최고가</h2>
-  <p class="lede">비트코인이 $80,000을 재탈환하며 1월 이후 최고치를 기록했다. ETF 유입 회복세가 이어지는 가운데 트레이더들은 추가 돌파에 여전히 신중한 입장이다. 4월 한 달간 지난 12개월 최강 월간 상승률을 기록했으나, CryptoQuant는 선물 주도 랠리를 경고했다.</p>
+  <h2><strong>$BTC</strong> 8만 달러 탈환, 숏 3억 달러 청산</h2>
+  <p class="lede">비트코인이 1월 이후 처음으로 $80,000선을 돌파하며 숏 포지션 약 3억 달러가 강제청산됐다. Strategy는 화요일 실적 발표 앞두고 매수를 일시 중단했고, 이더리움 재단은 BitMine에 1만 ETH 추가 매도했다.</p>
   <div class="peek">
-    <a class="row" href="https://cointelegraph.com/news/bitcoin-climbs-past-80k-for-the-first-time-since-january" target="_blank"><span class="dot green"></span><span class="t"><strong>$BTC</strong> $80,000 돌파 — 1월 이후 처음</span></a>
-    <a class="row" href="https://www.coindesk.com/markets/2026/05/04/the-bitcoin-etf-recovery-in-flows-is-real-it-is-just-not-complete-yet" target="_blank"><span class="dot yellow"></span><span class="t"><strong>$BTC</strong> ETF 유입 회복 중이지만 아직 완전하지 않아</span></a>
-    <a class="row" href="https://www.coindesk.com/business/2026/05/04/strategy-pauses-bitcoin-buys-before-tuesday-earnings" target="_blank"><span class="dot yellow"></span><span class="t">Strategy, 화요일 실적 발표 앞두고 <strong>$BTC</strong> 매수 일시 중단</span></a>
-    <a class="row" href="https://www.theblock.co/post/399790/cryptoquant-bitcoin-april-price-surge-speculative-spot-demand-weak-correction-risk" target="_blank"><span class="dot red"></span><span class="t">CryptoQuant "4월 랠리는 투기적, 현물 수요 약해 조정 위험"</span></a>
-    <a class="row" href="https://www.theblock.co/post/399819/north-korea-terrorism-creditors-move-to-seize-arbitrum-frozen-kelp-dao-eth-ahead-of-defi-united-vote" target="_blank"><span class="dot red"></span><span class="t">북한 테러 피해자 유족, Kelp DAO 동결 <strong>$ETH</strong> 압류 시도</span></a>
-    <a class="row" href="https://www.coindesk.com/business/2026/05/02/the-usd292m-crypto-hack-exposed-defi-s-weak-spots-here-s-what-must-change-insiders-say" target="_blank"><span class="dot red"></span><span class="t">$292M DeFi 해킹 — 취약점 노출, 업계 대응책 촉구</span></a>
+    <a class="row" href="https://cointelegraph.com/news/bitcoin-climbs-past-80k-for-the-first-time-since-january" target="_blank"><span class="dot green"></span><span class="t"><strong>$BTC</strong> $80,000 돌파 — 1월 이후 첫 탈환</span></a>
+    <a class="row" href="https://www.coindesk.com/markets/2026/05/04/crypto-bears-got-it-wrong-again-losing-usd300-million-in-liquidations" target="_blank"><span class="dot red"></span><span class="t">숏 포지션 $3억 청산 — 베어들 또 틀렸다</span></a>
+    <a class="row" href="https://www.theblock.co/post/399828/strategy-pauses-bitcoin-purchase-q1-earnings" target="_blank"><span class="dot yellow"></span><span class="t">Strategy, Q1 실적 발표 전 <strong>$BTC</strong> 매수 일시 중단</span></a>
+    <a class="row" href="https://cointelegraph.com/news/ethereum-foundation-sells-another-10000-eth-to-bitmine-in-third-otc-deal" target="_blank"><span class="dot yellow"></span><span class="t">이더리움 재단, BitMine에 <strong>$ETH</strong> 1만 개 추가 OTC 매도</span></a>
+    <a class="row" href="https://www.theblock.co/post/399819/north-korea-terrorism-creditors-move-to-seize-arbitrum-frozen-kelp-dao-eth-ahead-of-defi-united-vote" target="_blank"><span class="dot red"></span><span class="t">북한 테러 채권자, Kelp DAO 동결 <strong>$ETH</strong> 압류 시도</span></a>
+    <a class="row" href="https://www.theblock.co/post/399825/new-york-ag-settles-for-5-million-with-uphold-in-first-enforcement-action-against-a-crypto-yield-product-promoter" target="_blank"><span class="dot red"></span><span class="t">뉴욕 AG, Uphold에 $500만 제재 — 수익 상품 불법 홍보</span></a>
   </div>
 </div>
 
 <div class="card card-twitter">
   <div class="deco"><svg class="float" width="140" height="140" viewBox="0 0 140 140" style="top:-20px;right:-30px;opacity:.55"><circle cx="70" cy="70" r="70" fill="#a28cff"/></svg></div>
   <span class="chip">🔥 트위터 화제</span>
-  <h2><strong>$BTC</strong> · <strong>$SOL</strong> · <strong>$LUNC</strong> 주목</h2>
-  <p class="lede">지난 24시간 가장 많이 언급된 토큰들. 비트코인 8만 달러 돌파에 시장 전반이 들썩이고, 솔라나·루나클래식이 트렌딩 상위권을 유지 중이다.</p>
+  <h2><strong>$BTC</strong> · <strong>$ZEC</strong> · <strong>$MEGA</strong> 주목</h2>
+  <p class="lede">지난 24시간 가장 많이 언급된 토큰들. BTC 8만 달러 돌파가 시장 전반 화제, ZEC는 주간 +16.8% 급등, MegaETH는 트렌딩 급부상.</p>
   <div class="tags">
-    <a class="tag" href="https://www.coingecko.com/en/coins/bitcoin" target="_blank"><strong>$BTC</strong> — $80K 돌파, 1월 이후 최고가 경신 <span class="arrow">↗</span></a>
-    <a class="tag" href="https://www.coingecko.com/en/coins/solana" target="_blank"><strong>$SOL</strong> — 시장 반등 속 트렌딩 7위 유지 <span class="arrow">↗</span></a>
-    <a class="tag" href="https://www.coingecko.com/en/coins/terra-luna" target="_blank"><strong>$LUNC</strong> — 트렌딩 104위, 커뮤니티 재점화 <span class="arrow">↗</span></a>
-    <a class="tag" href="https://www.coingecko.com/en/coins/ondo-finance" target="_blank"><strong>$ONDO</strong> — RWA 토큰화 내러티브 부각, 54위 <span class="arrow">↗</span></a>
-    <a class="tag" href="https://www.coingecko.com/en/coins/pudgy-penguins" target="_blank"><strong>$PENGU</strong> — NFT 연계 밈 모멘텀 지속 <span class="arrow">↗</span></a>
-    <a class="tag" href="https://www.coingecko.com/en/coins/megaeth" target="_blank"><strong>$MEGA</strong> — MegaETH 출시 기대감 트렌딩 <span class="arrow">↗</span></a>
+    <a class="tag" href="https://www.coingecko.com/en/coins/bitcoin" target="_blank"><strong>$BTC</strong> — $80K 돌파·4월 12개월 최강 월간 상승 <span class="arrow">↗</span></a>
+    <a class="tag" href="https://www.coingecko.com/en/coins/zcash" target="_blank"><strong>$ZEC</strong> — 주간 +16.8%, BTC·ETH 압도한 프라이버시 코인 <span class="arrow">↗</span></a>
+    <a class="tag" href="https://www.coingecko.com/en/coins/megaeth" target="_blank"><strong>$MEGA</strong> — MegaETH 트렌딩 급부상, 커뮤니티 관심 집중 <span class="arrow">↗</span></a>
+    <a class="tag" href="https://www.coingecko.com/en/coins/ondo-finance" target="_blank"><strong>$ONDO</strong> — BlackRock GENIUS Act 코멘트로 RWA 섹터 동반 주목 <span class="arrow">↗</span></a>
+    <a class="tag" href="https://www.coingecko.com/en/coins/pudgy-penguins" target="_blank"><strong>$PENGU</strong> — NFT 시장 반등 기대감 속 트렌딩 유지 <span class="arrow">↗</span></a>
   </div>
 </div>
 
 <div class="card card-macro">
   <div class="deco"><svg class="float d2" width="120" height="120" viewBox="0 0 120 120" style="top:-25px;left:-25px;opacity:.55"><circle cx="60" cy="60" r="60" fill="#ff8a3d"/></svg></div>
   <span class="chip">🌍 거시·매크로 <span class="count-pill">5개</span></span>
-  <h2>CLARITY Act 진전 · 브라질 스테이블코인 금지</h2>
-  <p class="lede">미국 상원 CLARITY Act 스테이블코인 이자 조항 합의로 입법 탄력이 붙었다. 브라질 중앙은행은 국경간 결제에서 스테이블코인·크립토 정산을 금지했다. S&P 500은 신고가를 경신하며 위험자산 선호 심리가 강화되고 있다.</p>
+  <h2>GENIUS Act 타결 기대 · 고용 지표 주시</h2>
+  <p class="lede">Coinbase CEO가 CLARITY Act 스테이블코인 수익 조항 합의를 선언하며 상원 마크업에 속도가 붙었다. BlackRock은 토큰화 준비자산 20% 한도 반대 서한을 OCC에 제출했고, 이번 주 고용 지표와 주요 기업 실적이 암호화폐 시장 방향을 가를 변수로 부상했다.</p>
   <div class="peek">
-    <a class="row" href="https://www.theblock.co/post/399780/coinbase-says-deal-reached-on-clarity-act-stablecoin-yield-clearing-path-to-long-stalled-senate-markup" target="_blank"><span class="dot green"></span><span class="t">CLARITY Act 스테이블코인 이자 합의 — 상원 심의 길 열려</span></a>
-    <a class="row" href="https://www.coindesk.com/policy/2026/05/02/brazil-s-central-bank-bans-stablecoin-and-crypto-settlement-in-cross-border-payments" target="_blank"><span class="dot red"></span><span class="t">브라질 중앙은행, 국경간 결제 스테이블코인 사용 전면 금지</span></a>
-    <a class="row" href="https://www.theblock.co/post/399812/blackrock-urges-occ-to-drop-tokenized-reserve-cap-idea-expand-eligible-assets-in-genius-act-comment-letter" target="_blank"><span class="dot yellow"></span><span class="t">블랙록, GENIUS Act 토큰화 준비금 20% 상한 반대 의견 제출</span></a>
-    <a class="row" href="https://www.coindesk.com/markets/2026/05/04/jobs-data-earnings-calls-crypto-week-ahead" target="_blank"><span class="dot yellow"></span><span class="t">이번 주 고용지표·실적 발표 — 크립토 시장 변동성 주의</span></a>
-    <a class="row" href="https://www.theblock.co/post/399784/leading-iranian-crypto-exchange-nobitex-was-founded-by-sons-of-elite-political-family-tied-to-supreme-leaders-reuters" target="_blank"><span class="dot red"></span><span class="t">이란 최대 거래소 Nobitex, 최고지도자 연계 가문 설립 — 제재 우려</span></a>
+    <a class="row" href="https://www.theblock.co/post/399780/coinbase-says-deal-reached-on-clarity-act-stablecoin-yield-clearing-path-to-long-stalled-senate-markup" target="_blank"><span class="dot green"></span><span class="t">CLARITY Act 스테이블코인 수익 조항 합의 — 상원 마크업 임박</span></a>
+    <a class="row" href="https://www.theblock.co/post/399812/blackrock-urges-occ-to-drop-tokenized-reserve-cap-idea-expand-eligible-assets-in-genius-act-comment-letter" target="_blank"><span class="dot yellow"></span><span class="t">BlackRock, OCC에 토큰화 준비자산 20% 한도 삭제 요구</span></a>
+    <a class="row" href="https://www.coindesk.com/markets/2026/05/04/jobs-data-earnings-calls-crypto-week-ahead" target="_blank"><span class="dot yellow"></span><span class="t">이번 주 고용 지표·실적 시즌 — 크립토 시장 방향 결정 변수</span></a>
+    <a class="row" href="https://www.coindesk.com/policy/2026/05/02/brazil-s-central-bank-bans-stablecoin-and-crypto-settlement-in-cross-border-payments" target="_blank"><span class="dot red"></span><span class="t">브라질 중앙은행, 국경 간 결제에 스테이블코인·크립토 사용 금지</span></a>
+    <a class="row" href="https://www.theblock.co/post/399790/cryptoquant-bitcoin-april-price-surge-speculative-spot-demand-weak-correction-risk" target="_blank"><span class="dot red"></span><span class="t">CryptoQuant "4월 <strong>$BTC</strong> 급등은 투기적 — 현물 수요 약해 조정 위험"</span></a>
   </div>
 </div>
-    
-    <div class="card card-archive">
-      <div class="deco">
-        <svg class="float" width="140" height="140" viewBox="0 0 140 140" style="top:-40px;right:-30px;opacity:.5"><circle cx="70" cy="70" r="70" fill="#2f6bff"/></svg>
-      </div>
-      <span class="chip">📰 최근 아카이브</span>
-      <h2>최근 브리핑 다시보기</h2>
-      <div class="peek">
-    <a class="row" href="./archive/2026-05-04-1759.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-05-04 17:59</span></a>
-    <a class="row" href="./archive/2026-05-04-1250.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-05-04 12:50</span></a>
-    <a class="row" href="./archive/2026-05-03-1253.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-05-03 12:53</span></a>
-    <a class="row" href="./archive/2026-05-02-1232.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-05-02 12:32</span></a>
-    <a class="row" href="./archive/2026-05-01-1259.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-05-01 12:59</span></a>
-    <a class="row" href="./archive/2026-04-30-1245.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-30 12:45</span></a>
-    <a class="row" href="./archive/2026-04-29-1244.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-29 12:44</span></a>
-    <a class="row" href="./archive/2026-04-28-1248.html"><span class="dot" style="background:#2f6bff"></span><span class="t">2026-04-28 12:48</span></a>
-      </div>
-    </div>
   </div>
 </main>
 
@@ -434,6 +412,8 @@
 (function() {
   var COINS = [{"id":"bitcoin","sym":"BTC","cmc":"bitcoin"},{"id":"ethereum","sym":"ETH","cmc":"ethereum"},{"id":"hyperliquid","sym":"HYPE","cmc":"hyperliquid"},{"id":"solana","sym":"SOL","cmc":"solana"},{"id":"ripple","sym":"XRP","cmc":"xrp"}];
   var CMC_BASE = 'https://coinmarketcap.com/currencies/';
+  var CACHE_KEY = 'news_bot_ticker_cache_v1';
+  var CACHE_TTL = 60 * 1000; // 60초
 
   function fmtUsd(price) {
     if (price >= 1000) return '$' + price.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
@@ -448,7 +428,6 @@
   function makeSparkline(prices, width, height) {
     width = width || 60; height = height || 22;
     if (!prices || prices.length < 2) return '';
-    // 너무 많은 점은 샘플링
     var step = Math.max(1, Math.floor(prices.length / 40));
     var sampled = [];
     for (var i = 0; i < prices.length; i += step) sampled.push(prices[i]);
@@ -487,10 +466,31 @@
     return '극탐욕';
   }
 
+  // ========== 캐시 헬퍼 ==========
+  function loadCache() {
+    try {
+      var raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      var parsed = JSON.parse(raw);
+      if (!parsed || !parsed.timestamp) return null;
+      var age = Date.now() - parsed.timestamp;
+      // 캐시는 만료돼도 일단 그릴 수는 있게 반환 (만료여부와 함께)
+      return { data: parsed, expired: age > CACHE_TTL };
+    } catch (e) { return null; }
+  }
+
+  function saveCache(payload) {
+    try {
+      payload.timestamp = Date.now();
+      localStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+    } catch (e) {}
+  }
+
   // ========== 1) 메인 시세 + 스파크라인 ==========
   function renderPrices(coinsData, fngHtml) {
     var bar = document.getElementById('ticker-bar');
-    var html = '<span class="ticker-label">LIVE</span>';
+    if (!bar) return;
+    var html = '<span class="ticker-label">실시간 시세</span>';
     COINS.forEach(function(c) {
       var d = coinsData[c.id];
       if (!d) return;
@@ -510,6 +510,21 @@
     bar.innerHTML = html;
   }
 
+  function buildFngHtml(fngData) {
+    if (!fngData || !fngData.data || fngData.data.length < 2) return '';
+    var today = parseInt(fngData.data[0].value, 10);
+    var yesterday = parseInt(fngData.data[1].value, 10);
+    var pct = yesterday > 0 ? ((today - yesterday) / yesterday * 100) : 0;
+    var pctSign = pct >= 0 ? '+' : '';
+    var pctCls = pct >= 0 ? 'up' : 'down';
+    return '<div class="fng-badge" title="공포·탐욕 지수">' +
+      '<span class="fng-label">공포·탐욕</span>' +
+      '<span class="fng-value">' + today + '</span>' +
+      '<span class="fng-tag ' + fngClass(today) + '">' + fngLabel(today) + '</span>' +
+      '<span class="fng-ch ' + pctCls + '">(' + pctSign + pct.toFixed(1) + '%)</span>' +
+      '</div>';
+  }
+
   function fetchPrices() {
     var ids = COINS.map(function(c){ return c.id; }).join(',');
     var url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + ids +
@@ -522,31 +537,21 @@
       var marketArr = results[0];
       var fngData = results[1];
 
-      // ID로 인덱싱
       var byId = {};
       if (Array.isArray(marketArr)) {
         marketArr.forEach(function(c){ byId[c.id] = c; });
       }
-
-      // FNG HTML 만들기
-      var fngHtml = '';
-      if (fngData && fngData.data && fngData.data.length >= 2) {
-        var today = parseInt(fngData.data[0].value, 10);
-        var yesterday = parseInt(fngData.data[1].value, 10);
-        var pct = yesterday > 0 ? ((today - yesterday) / yesterday * 100) : 0;
-        var pctSign = pct >= 0 ? '+' : '';
-        var pctCls = pct >= 0 ? 'up' : 'down';
-        fngHtml = '<div class="fng-badge" title="공포·탐욕 지수">' +
-          '<span class="fng-label">공포·탐욕</span>' +
-          '<span class="fng-value">' + today + '</span>' +
-          '<span class="fng-tag ' + fngClass(today) + '">' + fngLabel(today) + '</span>' +
-          '<span class="fng-ch ' + pctCls + '">(' + pctSign + pct.toFixed(1) + '%)</span>' +
-          '</div>';
-      }
+      var fngHtml = buildFngHtml(fngData);
 
       renderPrices(byId, fngHtml);
+
+      // 캐시에 저장
+      var existing = loadCache();
+      var fxData = (existing && existing.data && existing.data.fx) || null;
+      saveCache({ prices: byId, fngHtml: fngHtml, fx: fxData });
     }).catch(function() {
       var bar = document.getElementById('ticker-bar');
+      if (!bar) return;
       var loading = bar.querySelector('.tk-loading');
       if (loading) loading.textContent = '시세 로드 실패 (잠시 후 재시도)';
     });
@@ -555,7 +560,8 @@
   // ========== 2) 김치 프리미엄 + 테더 ==========
   function renderFx(usdtKrw, usdtCh, kimchiPct) {
     var bar = document.getElementById('ticker-fx');
-    var html = '<span class="ticker-label">FX</span>';
+    if (!bar) return;
+    var html = '<span class="ticker-label">환율</span>';
 
     if (usdtKrw) {
       var chCls = usdtCh >= 0 ? 'up' : 'down';
@@ -575,13 +581,12 @@
     }
 
     if (!usdtKrw && (kimchiPct === null || kimchiPct === undefined)) {
-      html += '<span class="tk-loading">FX 데이터 로드 실패</span>';
+      html += '<span class="tk-loading">환율 데이터 로드 실패</span>';
     }
     bar.innerHTML = html;
   }
 
   function fetchFx() {
-    // Upbit (BTC, USDT) + CoinGecko (BTC USD)
     var pUpbit = fetch('https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-USDT')
                    .then(function(r){ return r.json(); })
                    .catch(function(){ return null; });
@@ -607,17 +612,46 @@
 
       var kimchi = null;
       if (btcKrw && usdtKrw && btcUsd) {
-        // 김프 = (BTC_KRW / (BTC_USD * USDT_KRW) - 1) * 100
         kimchi = (btcKrw / (btcUsd * usdtKrw) - 1) * 100;
       }
       renderFx(usdtKrw, usdtCh, kimchi);
+
+      // 캐시 갱신
+      var existing = loadCache();
+      var pricesData = (existing && existing.data && existing.data.prices) || {};
+      var fngHtmlData = (existing && existing.data && existing.data.fngHtml) || '';
+      saveCache({
+        prices: pricesData, fngHtml: fngHtmlData,
+        fx: { usdtKrw: usdtKrw, usdtCh: usdtCh, kimchi: kimchi }
+      });
     }).catch(function() {
       renderFx(null, null, null);
     });
   }
 
-  // 초기 + 60초 주기
-  fetchPrices(); fetchFx();
+  // ========== 캐시로 즉시 그리기 (깜빡임 방지) ==========
+  function paintFromCache() {
+    var c = loadCache();
+    if (!c || !c.data) return false;
+    if (c.data.prices && Object.keys(c.data.prices).length > 0) {
+      renderPrices(c.data.prices, c.data.fngHtml || '');
+    }
+    if (c.data.fx) {
+      renderFx(c.data.fx.usdtKrw, c.data.fx.usdtCh, c.data.fx.kimchi);
+    }
+    return !c.expired; // 캐시가 신선하면 true
+  }
+
+  // 1) 캐시로 즉시 표시 (페이지 전환 시 깜빡임 방지)
+  var fresh = paintFromCache();
+  // 2) 캐시가 없거나 60초 이상 지났으면 즉시 갱신, 신선하면 약간 지연
+  if (!fresh) {
+    fetchPrices(); fetchFx();
+  } else {
+    // 신선한 캐시가 있으면 백그라운드에서 잠시 후 갱신
+    setTimeout(function(){ fetchPrices(); fetchFx(); }, 1500);
+  }
+  // 60초 주기 갱신
   setInterval(fetchPrices, 60000);
   setInterval(fetchFx, 60000);
 })();
